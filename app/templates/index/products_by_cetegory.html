@@ -1,0 +1,142 @@
+﻿{% extends 'index/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} To'plamlar {% endblock %}
+{#{% block title %} Янги Шартномалар {% endblock %}#}
+{% block stylecontent %}
+
+
+{% endblock stylecontent %}
+
+{% block content%}
+  
+  <!-- Breadcrumbs -->
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <ul>
+            <li class="home"> <a href="index.html" title="Go to Home Page">Bosh sahifa</a> <span>/</span> </li>
+            <li> <a href="{% url 'products_by_category' id=one.id %}" title="">{{ one.name}}</a> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Breadcrumbs End --> 
+  
+  <!-- Main Container -->
+  <section class="main-container col1-layout">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-xs-12">
+          
+          <article class="col-main">
+            <h2 class="page-heading"> <span class="page-heading-title">Mahsulotlar ({{ one.name }})</span> </h2>
+            <div class="toolbar">
+              <div class="row">
+                <div class="col-md-4 col-sm-5">
+                  <div class="btn-group">
+                    <div id="grid-view" class="btn btn-default active" data-toggle="tooltip" title="Grid"><a href="{% url 'products_by_category' id=one.id %}"><i class="fa fa-th"></i></a></div>
+                    <div id="list-view" class="btn btn-default" data-toggle="tooltip" title="List"><a href="{% url 'products_lists_by_category' id=one.id %}"><i class="fa fa-th-list"></i></a></div>
+                  </div>
+                  <a href="compare.html" id="compare-total">Ko'rsatish turi</a> </div>
+                <div class="col-sm-2 text-right sort-by">
+                  <label class="control-label" for="input-sort">Saralash:</label>
+                </div>
+                <div class="col-md-3 col-sm-2 text-right">
+                  <select id="input_sort" class="form-control col-sm-3">
+                    <option value="0" >-- Kerakli kategoriyani tanlang --</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id == one.id %}selected{% endif %}>{{ category.name }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+                <div class="col-sm-1 text-right show-limit">
+                  <label class="control-label" for="input-limit">Ko'rsatish:</label>
+                </div>
+                <div class="col-sm-2 text-right">
+                  <select id="input-limit" class="form-control">
+                    <option value="" selected="selected">10</option>
+                    <option value="">20</option>
+                    <option value="">30</option>
+                    <option value="">40</option>
+                    <option value="">50</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="category-products">
+              <ul class="products-grid">
+
+                {% for product in products %}
+                    <li class="item col-lg-3 col-md-4 col-sm-4 col-xs-6" >
+                      <div class="item-inner">
+                        <div class="item-img">
+                          <div class="item-img-info">
+                              <a class="product-image" title="Product Title Here" ref="single_product.html">
+                                  <img alt="Product Title Here" src="/{{ product.foto }}" style="height: 300px">
+                              </a>
+                            <div class="jtv-box-hover">
+                              <ul class="add-to-links">
+                                <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                <li><a class="link-compare" href="{% url 'show_product' id=product.id %}"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item-info">
+                          <div class="info-inner">
+                            <div class="item-title"> <a title="Product Title Here" ref="single_product.html"> {{ product.name}} </a> </div>
+                            <div class="item-content">
+                              <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                              <div class="item-price">
+                                  <p class="old-price"> <span class="price-label"></span> <span class="price"> {{product.cost_sell}} so'm</span> </p>
+                                    <p class="special-price"> <span class="price-label"></span> <span class="price"> {{product.cost_discount}} so'm</span>
+                              </div>
+                              <div class="action">
+                                <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Savatchaga qo'shish</span> </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                {% endfor %}
+
+              </ul>
+            </div>
+            <div class="toolbar">
+              <div class="row">
+                <div class="col-sm-6 text-left">
+                  <ul class="pagination">
+                    <li class="active"><span>1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">&gt;</a></li>
+                    <li><a href="#">&gt;|</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-6 text-right">Showing 1 to 15 of 25 (2 Pages)</div>
+              </div>
+            </div>
+          </article>
+          <!--	///*///======    End article  ========= //*/// --> 
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!-- Main Container End --> 
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).on('change',"#input_sort",function(){
+            var id = $('#input_sort').val();
+            if (id != 0){
+                location.replace("http://127.0.0.1:8000/products_by_category/"+id)
+            }
+        });
+    </script>
+{% endblock content %}

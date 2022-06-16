@@ -1,0 +1,340 @@
+{% extends 'admin_page/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Mahsulotlar {% endblock title %}
+{#<link rel="stylesheet" href="{% static 'admin_page/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}" />#}
+
+{% block content%}
+
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+
+{% block stylecontent %}
+
+{% endblock stylecontent %}
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+       <div class="col-sm-12">
+         <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="{% url 'admin_page' %}">Bosh sahifa</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'products_sets' %}">To'plamlar</a></li>
+          </ol>
+        </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-12">
+{#        <a href="{% url 'products' %}" style="float: right" class="btn btn-warning text-light"><i class="fa fa-backward"></i> Orqaga</a>#}
+
+          <div class="card shadow-lg">
+                  <h3 class="text-primary text-center p-2">To'plam yaratish</h3>
+              <br>
+              <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if messages %}
+                                    <ul class="text text-center" style="font-size:18px">
+                                        {% for message in messages %}
+                                            {% if message.tags == "error"  %}
+                                                <div class="alert alert-error text text-danger" style="background-color: #f7d7da">
+                                                    <b><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> </b> <span>{{ message }}</span>
+                                                </div>
+
+                                            {% else %}
+                                                <div class="alert alert-success text-success" style="background-color:#d4edda">
+                                                     <span class="text text-success">{{ message }}</span>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+              <div class="container p-3">
+                  <form action="{% url 'product_store' %}" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                    <i for="cost_buy">Sinfi <sup class="text text-danger">*</sup></i>
+                                    <select class="form-control" name="category" id="category">
+                                        {% for class in classess %}
+                                            <option value="{{ class.id }}" {% if class.id == collection.sinf.id %}selected{% endif %}>{{ class.name }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                              </div>
+                          </div>
+
+
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                <i for="cost_buy">To'plam nomi <sup class="text text-danger">*</sup></i>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ collection.name }}">
+                              </div>
+                          </div>
+                        <div class="col-md-6">
+                              <div class="form-group">
+{#                                <i for="cost_buy">Foto</i>#}
+                                <input type="file" class="form-control" id="foto" name="foto" placeholder="">
+                              </div>
+                         </div>
+
+                         <div class="col-md-6">
+                              <div class="form-group">
+                                  <a href="/{{ collection.foto }}" target="_blank"> <i class="fa fa-eye"></i> To'plam suratini ko'rish</a>
+{#                                  <img src="/{{ collection.foto }}" class="image" style="width: 100%" alt="">#}
+                              </div>
+                         </div>
+
+                         <div class="col-md-12">
+                              <div class="form-group">
+                                <i for="cost_buy">Izox</i>
+                                <textarea name="info" id="info" class="form-control" rows="7">{{ collection.description }}</textarea>
+                              </div>
+                         </div>
+                         <div class="col-md-12">
+                              <div class="form-group">
+                                <i for="cost_buy">Status <sup class="text text-danger">*</sup></i>
+                                <select class="form-control" name="status" id="status">
+                                    <option value="0" {% if collection.status == '0' %}selected{% endif %}>Active</option>
+                                    <option value="1" {% if collection.status == '1' %}selected{% endif %}>Inactive</option>
+                                </select>
+                            </div>
+                         </div>
+
+
+
+                          <div class="col-md-12">
+                                <button type="button" style="width: 30%" class="btn btn-warning float-right"><i class="fa fa-plus-circle"></i> To'plam ma'lumotlarini o'zgartirish</button>
+                          </div>
+                        </div>
+                  </form>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="content" >
+    <div class="container" >
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-lg">
+                  <h3 class="text-primary text-center p-2">To'plam mahsulotlari</h3>
+
+              <div class="container p-3">
+
+                    <div class="row">
+                         <div class="col-md-12">
+                             <button type="button"  data-toggle="modal" data-target="#myModal" style="width: 25%" class="btn btn-primary float-right"><i class="fa fa-plus-circle"></i> Mahsulot qo'shish</button>
+                         </div>
+                    </div>
+                  <br>
+
+              <div class="modal" id="myModal">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                      <!-- Modal Header -->
+                      <div class="modal-header">
+                        <h4 class="modal-title">Mahsulot qo'shish</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+
+                      <!-- Modal body -->
+                      <div class="modal-body">
+                         <form action="{% url 'add_product_to_collection' %}" method="post" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="form-group">
+                                        <i for="cost_buy">Categoriyani tanlang<sup class="text text-danger">*</sup></i>
+                                        <select class="form-control" name="by_category" id="by_category">
+                                          <option value="0">-- Categoriyani tanlang --</option>
+                                            {% for category in categories %}
+                                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                  </div>
+
+                                <div style="display: none;width: 100%;"  id="show_product">
+
+                                   <div class="row">
+                                        <div class="col-md-8" >
+                                          <div class="form-group">
+                                            <i for="cost_buy">Mahsulot <sup class="text text-danger">*</sup></i>
+                                            <select class="form-control" style="width: 100%" name="product" required id="product">
+
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <i for="cost_buy">Soni <sup class="text text-danger">*</sup></i>
+                                            <input type="number" class="form-control" value="1" name="product_amount" id="product_amount" placeholder="Soni">
+                                        </div>
+                                    </div>
+
+                                   </div>
+
+                                </div>
+
+
+                                </div>
+
+                                 <div class="modal-footer">
+                                    <div class="col-md-12 text-center">
+                                        <input type="text" value="{{ collection.id }}" id="collection_id" name="collection_id" style="display: none">
+                                        <button type="submit" style="width: 100%" class="btn btn-sm btn-success float-right"><i class="fa fa-plus-circle"></i> Mahsulot qo'shish</button>
+                                    </div>
+                                </div>
+
+                          </form>
+                      </div>
+
+                      <!-- Modal footer -->
+
+
+                    </div>
+                  </div>
+                </div>
+
+                    <table id="example" class="table table-hover table-bordered text-center ">
+                <thead class="bg-secondary">
+                  <tr class="text-light">
+                    <th>#</th>
+                    <th>Mahsulot nomi</th>
+                    <th>Categoriyasi</th>
+                    <th>Firmasi</th>
+                    <th>Qiymati</th>
+                    <th>Status</th>
+                    <th>Rasmi</th>
+                    <th>Sozlamalar</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                {% for product in product_sets %}
+                        <tr>
+                            <td style="width: 1%"><i>{{ forloop.counter }}</i></td>
+                            <td><i>{{ product.product.name }}</i></td>
+                            <td><i>{{ product.product.category.name }}</i></td>
+                            <td><i>{{ product.product.company }}</i></td>
+                            <td><i>{{ product.product_amount }}</i></td>
+                            <td>
+                                {% if product.product.status == 0 %}
+                                    <p class="text-success"><i class="fa fa-check"></i> <i>Fa'ol</i></p>
+                                {% endif %}
+                                {% if product.product.status == 1 %}
+                                    <p class="text-warning"><i class="fa fa-warning"></i> <i>No fa'ol</i></p>
+                                {% endif %}
+
+                            </td>
+                            <td style="width: 15%"><img src="/{{ product.product.foto }}" style="width: 30%" alt=""></td>
+                            <td>
+                                <div class="form-group">
+                                    <a href="{% url 'delete_collection_product' id=product.product.id %}" class="p-1"><i class="fa fa-trash-o"></i></a>
+    {#                                <a href="#" class="p-1"><i class="fa fa-eye"></i></a>#}
+                                </div>
+                            </td>
+                          </tr>
+                {% endfor %}
+
+                </tbody>
+                <tfoot class="bg-secondary">
+                  <tr class="text-light">
+                    <th>#</th>
+                    <th>Mahsulot nomi</th>
+                    <th>Categoriyasi</th>
+                    <th>Firmasi</th>
+                    <th>Qiymati</th>
+                    <th>Status</th>
+                    <th>Rasmi</th>
+                    <th>Sozlamalar</th>
+                  </tr>
+                </tfoot>
+              </table>
+              </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{% endblock %} {% block scriptcontent %}
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>
+
+    <script>
+        $(document).on('change',"#by_category",function(){
+             if($('#by_category').val() != '0'){
+                $('#show_product').css('display','inline-block');
+            }
+            else{
+                $('#show_product').css('display','none');
+            }
+
+            var data = new FormData();
+            data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
+            data.append("category", $('#by_category').val());
+{#            alert($('#branch').val());#}
+            event.preventDefault();
+                  $.ajax({
+                  type: 'POST',
+                  url: '{% url 'show_product_list' %}',
+                  data: data,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success: function (result){
+                  text = '';
+{#                  text = `<option value='0' style='width:100%' class='form-control'>--- Mahsulotni tanlang ---</option>`;#}
+                     for (let i = 0; i < result['products'].length; i++) {
+                        text +=`<option class='form-control' style='width:100%' value=`+result['products'][i].id+`>`+result['products'][i].name+ `</option>`;
+                     }
+                        $('#product').html(text);
+                  },
+
+                  error: function(){
+                        alert('Ajax da xatolik !! ');
+                     }
+            });
+        });
+
+    </script>
+
+
+
+    <script>
+        CKEDITOR.replace('info');
+    </script>
+
+{% endblock scriptcontent %}

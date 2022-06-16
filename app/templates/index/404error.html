@@ -1,0 +1,29 @@
+﻿{% extends 'index/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Error page {% endblock %}
+{#{% block title %} Янги Шартномалар {% endblock %}#}
+{% block stylecontent %}
+
+
+{% endblock stylecontent %}
+
+{% block content%}
+  <!-- end nav -->   
+  <!-- main-container -->
+  <section class="content-wrapper">
+    <div class="container">
+      <div class="std">
+        <div class="page-not-found">
+          <h2>404</h2>
+          <h3><img src="{% static 'site/images/signal.png' %}">Kechirasiz ! Siz izlagan sahifa topilmadi</h3>
+          <div><a href="{% url 'index' %}" type="button" class="btn-home"><span>Bosh sahifaga qaytish</span></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!--End main-container --> 
+  
+
+{% endblock content %}

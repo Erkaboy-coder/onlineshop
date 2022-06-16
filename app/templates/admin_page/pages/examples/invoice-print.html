@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from adminlte.io/themes/v3/pages/examples/invoice-print.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Jun 2022 10:28:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdminLTE 3 | Invoice Print</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+<link rel="stylesheet" href="../../../../static/admin/plugins/fontawesome-free/css/all.min.css">
+
+<link rel="stylesheet" href="../../../../static/admin/dist/css/adminlte.min2167.css?v=3.2.0">
+<script nonce="72748904-b3a0-4d78-ba36-853033185c82">(function(w,d){!function(a,e,t,r){a.zarazData=a.zarazData||{},a.zarazData.executed=[],a.zaraz={deferred:[]},a.zaraz.q=[],a.zaraz._f=function(e){return function(){var t=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:t})}};for(const e of["track","set","ecommerce","debug"])a.zaraz[e]=a.zaraz._f(e);a.addEventListener("DOMContentLoaded",(()=>{var t=e.getElementsByTagName(r)[0],z=e.createElement(r),n=e.getElementsByTagName("title")[0];for(n&&(a.zarazData.t=e.getElementsByTagName("title")[0].text),a.zarazData.x=Math.random(),a.zarazData.w=a.screen.width,a.zarazData.h=a.screen.height,a.zarazData.j=a.innerHeight,a.zarazData.e=a.innerWidth,a.zarazData.l=a.location.href,a.zarazData.r=e.referrer,a.zarazData.k=a.screen.colorDepth,a.zarazData.n=e.characterSet,a.zarazData.o=(new Date).getTimezoneOffset(),a.zarazData.q=[];a.zaraz.q.length;){const e=a.zaraz.q.shift();a.zarazData.q.push(e)}z.defer=!0;for(const e of[localStorage,sessionStorage])Object.keys(e).filter((a=>a.startsWith("_zaraz_"))).forEach((t=>{try{a.zarazData["z_"+t.slice(7)]=JSON.parse(e.getItem(t))}catch{a.zarazData["z_"+t.slice(7)]=e.getItem(t)}}));z.referrerPolicy="origin",z.src="../../../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(a.zarazData))),t.parentNode.insertBefore(z,t)}))}(w,d,0,"script");})(window,document);</script></head>
+<body>
+<div class="wrapper">
+
+<section class="invoice">
+
+<div class="row">
+<div class="col-12">
+<h2 class="page-header">
+<i class="fas fa-globe"></i> AdminLTE, Inc.
+<small class="float-right">Date: 2/10/2014</small>
+</h2>
+</div>
+
+</div>
+
+<div class="row invoice-info">
+<div class="col-sm-4 invoice-col">
+From
+<address>
+<strong>Admin, Inc.</strong><br>
+795 Folsom Ave, Suite 600<br>
+San Francisco, CA 94107<br>
+Phone: (804) 123-5432<br>
+Email: <a href="https://adminlte.io/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb2b5bdb49bbab7b6baa8babebebfa8afaebfb2b4f5b8b4b6">[email&#160;protected]</a>
+</address>
+</div>
+
+<div class="col-sm-4 invoice-col">
+To
+<address>
+<strong>John Doe</strong><br>
+795 Folsom Ave, Suite 600<br>
+San Francisco, CA 94107<br>
+Phone: (555) 539-1037<br>
+Email: <a href="https://adminlte.io/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dfdadddb9bd1dad0f5d0cdd4d8c5d9d09bd6dad8">[email&#160;protected]</a>
+</address>
+</div>
+
+<div class="col-sm-4 invoice-col">
+<b>Invoice #007612</b><br>
+<br>
+<b>Order ID:</b> 4F3S8J<br>
+<b>Payment Due:</b> 2/22/2014<br>
+<b>Account:</b> 968-34567
+</div>
+
+</div>
+
+
+<div class="row">
+<div class="col-12 table-responsive">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Qty</th>
+<th>Product</th>
+<th>Serial #</th>
+<th>Description</th>
+<th>Subtotal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Call of Duty</td>
+<td>455-981-221</td>
+<td>El snort testosterone trophy driving gloves handsome</td>
+<td>$64.50</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Need for Speed IV</td>
+<td>247-925-726</td>
+<td>Wes Anderson umami biodiesel</td>
+<td>$50.00</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Monsters DVD</td>
+<td>735-845-642</td>
+<td>Terry Richardson helvetica tousled street art master</td>
+<td>$10.70</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Grown Ups Blue Ray</td>
+<td>422-568-642</td>
+<td>Tousled lomo letterpress</td>
+<td>$25.99</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-6">
+<p class="lead">Payment Methods:</p>
+<img src="../../../../static/admin/dist/img/credit/visa.png" alt="Visa">
+<img src="../../../../static/admin/dist/img/credit/mastercard.png" alt="Mastercard">
+<img src="../../../../static/admin/dist/img/credit/american-express.png" alt="American Express">
+<img src="../../../../static/admin/dist/img/credit/paypal2.png" alt="Paypal">
+<p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr
+jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+</p>
+</div>
+
+<div class="col-6">
+<p class="lead">Amount Due 2/22/2014</p>
+<div class="table-responsive">
+<table class="table">
+<tr>
+<th style="width:50%">Subtotal:</th>
+<td>$250.30</td>
+</tr>
+<tr>
+<th>Tax (9.3%)</th>
+<td>$10.34</td>
+</tr>
+<tr>
+<th>Shipping:</th>
+<td>$5.80</td>
+</tr>
+<tr>
+<th>Total:</th>
+<td>$265.24</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<script data-cfasync="false" src="../../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  window.addEventListener("load", window.print());
+</script>
+</body>
+
+<!-- Mirrored from adminlte.io/themes/v3/pages/examples/invoice-print.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Jun 2022 10:28:28 GMT -->
+</html>

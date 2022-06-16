@@ -1,0 +1,119 @@
+{% extends 'admin_page/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Mahsulotlar {% endblock title %}
+{#<link rel="stylesheet" href="{% static 'admin_page/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}" />#}
+
+{% block content%}
+
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+{% block stylecontent %}
+
+{% endblock stylecontent %}
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Mahsulotlar</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="{% url 'admin_page' %}">Bosh sahifa</a>
+            </li>
+            <li class="breadcrumb-item active">Mahsulotlar</li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-lg">
+            <div class="card-header">
+              <h3 class="card-title">Barcha mahsulotlar</h3>
+                <a href="{% url 'add_product' %}" class="btn btn-success" style="float: right"> <i class="fa fa-plus-circle"></i> Mahsulot qo'shish</a>
+            </div>
+
+            <div class="card-body">
+              <table id="example" class="table table-hover table-bordered text-center ">
+                <thead class="bg-secondary">
+                  <tr class="text-light">
+                    <th>#</th>
+                    <th>Mahsulot nomi</th>
+                    <th>Categoriyasi</th>
+                    <th>Firmasi</th>
+                    <th>Status</th>
+                    <th>Rasmi</th>
+                    <th>Sozlamalar</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                {% for product in products %}
+                    <tr>
+                        <td style="width: 1%"><i>{{ forloop.counter }}</i></td>
+                        <td><i>{{ product.name }}</i></td>
+                        <td><i>{{ product.category.name }}</i></td>
+                        <td><i>{{ product.company }}</i></td>
+                        <td>
+                            {% if product.status == 0 %}
+                                <p class="text-success"><i class="fa fa-check"></i> <i>Fa'ol</i></p>
+                            {% endif %}
+                            {% if product.status == 1 %}
+                                <p class="text-warning"><i class="fa fa-warning"></i> <i>No fa'ol</i></p>
+                            {% endif %}
+
+                        </td>
+                        <td style="width: 15%"><img src="/{{ product.foto }}" style="width: 30%" alt=""></td>
+                        <td>
+                            <div class="form-group">
+                                <a href="{% url 'delete_product' id=product.id %}" class="p-1"><i class="fa fa-trash-o"></i></a>
+{#                                <a href="#" class="p-1"><i class="fa fa-eye"></i></a>#}
+                                <a href="{% url 'edit_product' id=product.id %}" class="p-1"><i class="fa fa-edit"></i></a>
+                            </div>
+                        </td>
+                      </tr>
+                {% endfor %}
+
+                </tbody>
+                <tfoot class="bg-secondary">
+                  <tr class="text-light">
+                    <th>#</th>
+                    <th>Mahsulot nomi</th>
+                    <th>Categoriyasi</th>
+                    <th>Firmasi</th>
+                    <th>Status</th>
+                    <th>Rasmi</th>
+                    <th>Sozlamalar</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{% endblock %} {% block scriptcontent %}
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>
+
+{% endblock scriptcontent %}

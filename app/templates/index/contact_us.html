@@ -1,0 +1,125 @@
+﻿{% extends 'index/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Bog'lanish {% endblock %}
+
+{% block stylecontent %}
+
+
+{% endblock stylecontent %}
+
+{% block content%}
+  
+  <!-- breadcrumbs -->
+  
+    <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <ul>
+            <li class="home"> <a title="Go to Home Page" href="index.html">Home</a> <span>/</span> </li>
+            <li class="category1601"> <strong>Bo</strong> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- main-container -->
+  <div class="main-container col2-right-layout">
+    <div class="main container">
+      <div class="row">
+        <section class="col-sm-9 wow ">
+            <div class="col-main">
+                  <div class="page-title">
+                    <h2>Bog'lanish</h2>
+                  </div>
+
+                  <div class="container" style="box-shadow: 5px 8px 5px 8px rgba(0,0,0,0.4);width: 180%;padding: 10px;border-radius: 10px">
+                       <div class="row" style="width: 100%">
+
+                              <div class="col-md-12">
+                                <form id="contact-form" method="post" action="" role="form" >
+
+{#                                <div class="messages"></div>#}
+
+                                <div class="controls">
+
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                        <label for="form_name">Ismingiz *</label>
+                                        <input id="form_name" type="text" style="width: 100%" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                                        <div class="help-block with-errors"></div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                        <label for="form_lastname">Familiyangiz *</label>
+                                        <input id="form_lastname" style="width: 100%" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                                        <div class="help-block with-errors"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                        <label for="form_email">Email *</label>
+                                        <input id="form_email" type="email" style="width: 100%" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                                        <div class="help-block with-errors"></div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                        <label for="form_phone">Tel raqamingiz</label>
+                                        <input id="form_phone" style="width: 100%" type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
+                                        <div class="help-block with-errors"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="form-group">
+                                        <label for="form_message">Xabar matni *</label>
+                                        <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required data-error="Please,leave us a message."></textarea>
+                                        <div class="help-block with-errors"></div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-12" >
+                                      <input type="submit" style="float: right" class="btn btn-success btn-send" value="Yuborish">
+                                    </div>
+                                  </div>
+
+                                </div>
+
+                                </form>
+                              </div>
+
+                       </div>
+                  </div>
+            </div>
+        </section>
+
+        <aside class="col-right sidebar col-sm-3 wow">
+          <div class="block block-company">
+            <div class="block-title">Company </div>
+            <div class="block-content">
+              <ol id="recently-viewed-items">
+                <li class="item odd"><a href="#">About Us</a></li>
+                <li class="item even"><a href="#">Sitemap</a></li>
+                <li class="item  odd"><a href="#">Terms of Service</a></li>
+                <li class="item even"><a href="#">Search Terms</a></li>
+                <li class="item last"><strong>Contact Us</strong></li>
+              </ol>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+  <!--End main-container --> 
+  
+
+{% endblock content %}

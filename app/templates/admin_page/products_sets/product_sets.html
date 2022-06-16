@@ -1,0 +1,193 @@
+{% extends 'admin_page/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Mahsulotlar {% endblock title %}
+{#<link rel="stylesheet" href="{% static 'admin_page/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}" />#}
+
+{% block content%}
+
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+{% block stylecontent %}
+
+{% endblock stylecontent %}
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>To'plamlar</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="{% url 'admin_page' %}">Bosh sahifa</a>
+            </li>
+            <li class="breadcrumb-item active">To'plamlar</li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-lg">
+            <div class="card-header">
+              <h3 class="card-title">Barcha to'plamlar</h3>
+                <a href="{% url 'add_collection' %}" class="btn btn-success" style="float: right"> <i class="fa fa-plus-circle"></i> To'plam qo'shish</a>
+            </div>
+              <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if messages %}
+                                <ul class="text text-center" style="font-size:13px">
+                                    {% for message in messages %}
+                                        {% if message.tags == "error"  %}
+                                            <div class="alert alert-error text text-danger" style="background-color: #f7d7da">
+                                                <b><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> </b> <span>{{ message }}</span>
+                                            </div>
+
+                                        {% else %}
+                                            <div class="alert alert-success text-success" style="background-color:#d4edda">
+                                                 <span class="text text-success">{{ message }}</span>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+              <table id="example" class="table table-hover table-bordered text-center ">
+                <thead class="bg-secondary">
+                  <tr class="text-light">
+                    <th>#</th>
+                    <th>Sinfi</th>
+                    <th>Elementlari soni</th>
+                    <th>To'plam tannarxi</th>
+                    <th>To'plam sotuv narxi</th>
+                    <th>To'plam skidkadagi narxi</th>
+                    <th>Rasmi</th>
+                    <th>Xolati</th>
+                    <th>Sozlamalar</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                {% for collection in collections %}
+
+                    <tr>
+                        <td style="width: 1%"><i>{{ forloop.counter }}</i></td>
+                        <td><i>{{ collection.name }}</i></td>
+                        <td>
+                            <i class="count_number" count="{% for product in products %}{% if product.collection.id == collection.id %}{{ product.product.id }},{% endif %}{% endfor %}"></i>
+                        </td>
+                        <td><i>{{ collection.cost_buy }}</i></td>
+                        <td><i>{{ collection.cost_sell }}</i></td>
+                        <td><i>{{ collection.cost_discount }}</i></td>
+{#                        <td>#}
+{#                            <i class="sum_sell" sum-sell="{% for product in products %}{% if product.collection.id == collection.id %}{{ product.product.cost_sell }},{% endif %}{% endfor %}"></i>#}
+{#                        </td>#}
+                        <td style="width: 15%"><img src="/{{ collection.foto }}" style="width: 30%" alt=""></td>
+
+                        <td>
+                            {% if collection.status == 0 %}
+                                <p class="text-success"><i class="fa fa-check"></i> <i>Fa'ol</i></p>
+                            {% endif %}
+                            {% if collection.status == 1 %}
+                                <p class="text-warning"><i class="fa fa-warning"></i> <i>No fa'ol</i></p>
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <a href="{% url 'delete_collection' id=collection.id %}" class="p-1"><i class="fa fa-trash-o"></i></a>
+{#                                <a href="#" class="p-1"><i class="fa fa-eye"></i></a>#}
+                                <a href="{% url 'product_add_to_collection' id=collection.id %}" class="p-1"><i class="fa fa-edit"></i></a>
+                            </div>
+                        </td>
+                      </tr>
+                {% endfor %}
+
+                </tbody>
+                <tfoot class="bg-secondary">
+                  <tr class="text-light">
+                     <th>#</th>
+                    <th>Sinfi</th>
+                    <th>Elementlari soni</th>
+                    <th>To'plam tannarxi</th>
+                    <th>To'plam sotuv narxi</th>
+                    <th>To'plam skidkadagi narxi</th>
+                    <th>Rasmi</th>
+                    <th>Xolati</th>
+                    <th>Sozlamalar</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$('.count_number').each(function(i,obj){
+    let text=$(this).attr('count');
+    num=text.split(',');
+    let s=0;
+    for(let i in num){
+    if(num[i]!='')
+      s++;
+      }
+        $(this).text(s);
+    });
+
+    $('.sum_buy').each(function(i,obj){
+    let text=$(this).attr('sum-buy');
+    num=text.split(',');
+    let s=0;
+    for(let i in num){
+    if(num[i]!='')
+      s = s+parseInt(num[i]);
+      }
+        $(this).text(s);
+    });
+
+    $('.sum_sell').each(function(i,obj){
+    let text=$(this).attr('sum-sell');
+    num=text.split(',');
+    let s=0;
+    for(let i in num){
+    if(num[i]!='')
+      s = s+parseInt(num[i]);
+      }
+        $(this).text(s);
+    });
+
+  });
+</script>
+
+{% endblock %} {% block scriptcontent %}
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>
+
+{% endblock scriptcontent %}

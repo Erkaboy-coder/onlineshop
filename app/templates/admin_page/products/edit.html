@@ -1,0 +1,179 @@
+{% extends 'admin_page/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Mahsulotlar {% endblock title %}
+{#<link rel="stylesheet" href="{% static 'admin_page/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}" />#}
+
+{% block content%}
+
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+
+{% block stylecontent %}
+
+{% endblock stylecontent %}
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+         <ol class="breadcrumb ">
+            <li class="breadcrumb-item"><a href="{% url 'admin_page' %}">Bosh sahifa</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'products' %}">Mahsulotlar</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'edit_product' id=product.id %}">Ma'lumotlarni o'zgartirish</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+
+    <div class="container-fluid">
+
+      <div class="row">
+          <div class="col-12">
+              <div class="card shadow-lg">
+              <div class="container p-3">
+
+              <a href="{% url 'products' %}" style="float: right" class="btn btn-warning text-light"><i class="fa fa-backward"></i> Orqaga</a>
+
+                  <form action="{% url 'product_info_change' id=product.id %}" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <i for="cost_buy">Categoriyasi <sup class="text text-danger">*</sup></i>
+                                <select class="form-control" name="category" required id="category">
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}" {% if product.category == category.id %}selected{% endif %}>{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                          </div>
+
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                <i for="cost_buy">Nomi <sup class="text text-danger">*</sup></i>
+                                <input type="text" class="form-control" id="name" value="{{ product.name }}" name="name" required placeholder="Mahsulot nomi">
+                              </div>
+                          </div>
+
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                 <i for="cost_buy">Mahsulot tan narxi </i>
+                                <input type="number" min="0" class="form-control" id="cost_buy" value="{{ product.cost_buy }}" required name="cost_buy" placeholder="Mahsulot tan narxi">
+                              </div>
+                          </div>
+
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                  <i for="cost_buy">Mahsulot sotuv narxi</i>
+                                <input type="number" min="0" class="form-control" id="cost_sell" value="{{ product.cost_sell }}" required name="cost_sell" placeholder="Mahsulot sotuv narxi">
+                              </div>
+                          </div>
+
+{#                          <div class="col-md-4">#}
+{#                              <div class="form-group">#}
+{#                                <input type="number" min="0" class="form-control" id="cost_discount" name="cost_discount" placeholder="Mahsulot chegirma narxi">#}
+{#                              </div>#}
+{#                          </div>#}
+
+
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                 <i for="cost_buy">Chegirma narxi </i>
+                                <input type="number" min="0" class="form-control" id="cost_discount" value="{{ product.cost_discount }}" name="cost_discount" placeholder="Chegirma narxi">
+                              </div>
+                          </div>
+
+
+                         <div class="col-md-6">
+                              <div class="form-group">
+                                 <i for="cost_buy">Mahsulot firmasi</i>
+                                <input type="text" class="form-control" id="company" name="company" value="{{ product.company }}" placeholder="Mahsulot firmasi">
+                              </div>
+                         </div>
+
+                         <div class="col-md-6">
+                              <div class="form-group">
+                                    <i for="cost_buy">O'lchov birligi</i>
+                                    <select class="form-control"  name="amount" id="amount" title="O'lchov birligini tanlang">
+                                      <option value="0" {% if product.amount == '0' %}selected{% endif %} >Dona</option>
+                                      <option value="1" {% if product.amount == '1' %}selected{% endif %}>Pochka</option>
+                                    </select>
+                              </div>
+                        </div>
+
+
+                         <div class="col-md-6">
+                              <div class="form-group">
+                                <i for="cost_buy">Yangi fotosurat</i>
+                                <input type="file" class="form-control" id="foto" name="foto" placeholder="">
+                              </div>
+                         </div>
+
+                        <div class="col-md-6 text-center">
+                            <div class="form-group">
+                                <br>
+
+                                <a href="/{{ product.foto }}"><i class="fa fa-eye"></i> Eski foto suratni ko'rish</a>
+                            </div>
+                        </div>
+
+
+
+                         <div class="col-md-12">
+                              <div class="form-group">
+                                <i for="cost_buy">Izox</i>
+                                <textarea name="info" id="info" class="form-control" rows="7">{{ product.info }}</textarea>
+                              </div>
+                         </div>
+
+                         <div class="col-md-12">
+                              <div class="form-group">
+                                <i for="cost_buy">Xolati <sup class="text text-danger">*</sup></i>
+                                <select class="form-control" name="status" id="status">
+                                    <option value="0" {% if product.status == '0' %}selected{% endif %}>Fa'ol</option>
+                                    <option value="1" {% if product.status == '1' %}selected{% endif %}>No fa'ol</option>
+                                </select>
+                            </div>
+                          </div>
+
+
+                          <div class="col-md-12">
+                                <button type="submit" style="width: 25%" class="btn btn-warning float-right"><i class="fa fa-edit"></i> O'zgartirish</button>
+                          </div>
+
+                        </div>
+                  </form>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{% endblock %} {% block scriptcontent %}
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>
+
+
+
+    <script>
+        CKEDITOR.replace('info');
+    </script>
+
+{% endblock scriptcontent %}

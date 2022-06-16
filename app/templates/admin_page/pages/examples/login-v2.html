@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Mirrored from adminlte.io/themes/v3/pages/examples/login-v2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Jun 2022 10:28:21 GMT -->
+  <!-- Added by HTTrack --><meta
+    http-equiv="content-type"
+    content="text/html;charset=UTF-8"
+  /><!-- /Added by HTTrack -->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AdminLTE 3 | Log in (v2)</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback"/>
+
+    <link rel="stylesheet" href="../../../../static/admin/plugins/fontawesome-free/css/all.min.css"/>
+
+    <link rel="stylesheet" href="../../../../static/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="../../../../static/admin/dist/css/adminlte.min2167.css?v=3.2.0"/>
+
+    <script nonce="ebc06f1d-dd96-44ab-b4d1-95f41061f111">
+      (function (w, d) {
+        !(function (a, e, t, r) {
+          (a.zarazData = a.zarazData || {}),
+            (a.zarazData.executed = []),
+            (a.zaraz = { deferred: [] }),
+            (a.zaraz.q = []),
+            (a.zaraz._f = function (e) {
+              return function () {
+                var t = Array.prototype.slice.call(arguments);
+                a.zaraz.q.push({ m: e, a: t });
+              };
+            });
+          for (const e of ["track", "set", "ecommerce", "debug"])
+            a.zaraz[e] = a.zaraz._f(e);
+          a.addEventListener("DOMContentLoaded", () => {
+            var t = e.getElementsByTagName(r)[0],
+              z = e.createElement(r),
+              n = e.getElementsByTagName("title")[0];
+            for (
+              n && (a.zarazData.t = e.getElementsByTagName("title")[0].text),
+                a.zarazData.x = Math.random(),
+                a.zarazData.w = a.screen.width,
+                a.zarazData.h = a.screen.height,
+                a.zarazData.j = a.innerHeight,
+                a.zarazData.e = a.innerWidth,
+                a.zarazData.l = a.location.href,
+                a.zarazData.r = e.referrer,
+                a.zarazData.k = a.screen.colorDepth,
+                a.zarazData.n = e.characterSet,
+                a.zarazData.o = new Date().getTimezoneOffset(),
+                a.zarazData.q = [];
+              a.zaraz.q.length;
+
+            ) {
+              const e = a.zaraz.q.shift();
+              a.zarazData.q.push(e);
+            }
+            z.defer = !0;
+            for (const e of [localStorage, sessionStorage])
+              Object.keys(e)
+                .filter((a) => a.startsWith("_zaraz_"))
+                .forEach((t) => {
+                  try {
+                    a.zarazData["z_" + t.slice(7)] = JSON.parse(e.getItem(t));
+                  } catch {
+                    a.zarazData["z_" + t.slice(7)] = e.getItem(t);
+                  }
+                });
+            (z.referrerPolicy = "origin"),
+              (z.src =
+                "../../../../cdn-cgi/zaraz/sd0d9.js?z=" +
+                btoa(encodeURIComponent(JSON.stringify(a.zarazData)))),
+              t.parentNode.insertBefore(z, t);
+          });
+        })(w, d, 0, "script");
+      })(window, document);
+    </script>
+  </head>
+  <body class="hold-transition login-page">
+    <div class="login-box" >
+      <div class="card card-outline card-primary shadow-lg">
+        <div class="card-header text-center">
+          <a href="../../index2.html" class="h1"><b>Shop</b> MART</a>
+        </div>
+        <div class="card-body">
+
+
+          <p class="login-box-msg">Tizimga kirish</p>
+             {% if messages %}
+                 <b class="text text-center" style="font-size:13px;">
+                     {% for message in messages %}
+                         {% if message.tags == "error"  %}
+                             <div class="alert alert-error text text-danger" style="background-color: #f7d7da">
+                                 <b><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> </b> <span>{{ message }}</span>
+                             </div>
+
+                         {% else %}
+                             <div class="alert alert-success text-success" style="background-color:#d4edda">
+                                 <span class="text text-success">{{ message }}</span>
+                             </div>
+                         {% endif %}
+                     {% endfor %}
+                 </b>
+             {% endif %}
+
+          <form action="{% url 'sign_in' %}"  method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+{#          <form action="https://adminlte.io/themes/v3/index3.html" method="post">#}
+              <div class="input-group mb-3">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope"></span>
+                    </div>
+                  </div>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email" />
+              </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+{#                <button type="button" class="btn btn-primary btn-block" id="sign_in"> Kirish </button>#}
+                <button type="submit" class="btn btn-primary btn-block"> Kirish </button>
+              </div>
+            </div>
+
+          </form>
+
+{#          <div class="social-auth-links text-center mt-2 mb-3">#}
+{#            <a href="#" class="btn btn-block btn-primary">#}
+{#              <i class="fab fa-facebook mr-2"></i> Sign in using Facebook#}
+{#            </a>#}
+{#            <a href="#" class="btn btn-block btn-danger">#}
+{#              <i class="fab fa-google-plus mr-2"></i> Sign in using Google+#}
+{#            </a>#}
+{#          </div>#}
+
+          <p class="mb-1 mt-1">
+            <a href="forgot-password.html">Parolni tiklash</a>
+          </p>
+
+          <p class="mb-0">
+            <a href="register.html" class="text-center">Ro'yxatdan o'tish</a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).on('click',"#sign_in",function(){
+        var data = new FormData();
+        data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
+
+        data.append("email", $('#email').val());
+        data.append("password", $('#password').val());
+
+        email = $('#email').val();
+        password = $('#password').val();
+
+        event.preventDefault();
+            if(password){
+                   $.ajax({
+                    type: 'POST',
+                    url: '{% url 'login' %}',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (result){
+                        if(result == '1'){
+                            location.replace('/admin_page');
+                        }
+
+                        else{
+                            location.replace('/login');
+                        }
+
+                    },
+
+                    error: function(){
+                      alert('Ajax da xatolik !! ');
+                    }
+                });
+
+            }
+            else{
+                alert("Maydonllarni ro'ldiring");
+            }
+        });
+    </script>
+
+    <script src="../../../../static/admin/plugins/jquery/jquery.min.js"></script>
+
+    <script src="../../../../static/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../../../../static/admin/dist/js/adminlte.min2167.js?v=3.2.0"></script>
+  </body>
+
+  <!-- Mirrored from adminlte.io/themes/v3/pages/examples/login-v2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Jun 2022 10:28:21 GMT -->
+</html>

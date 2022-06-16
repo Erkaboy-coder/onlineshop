@@ -1,0 +1,774 @@
+﻿{% extends 'index/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Bosh sahifa{% endblock %}
+{#{% block title %} Янги Шартномалар {% endblock %}#}
+{% block stylecontent %}
+
+
+{% endblock stylecontent %}
+
+{% block content%}
+        <!-- our features -->
+        <div class="our-features-box hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-xs-12 col-sm-6">
+                        <div class="feature-box first"> <i class="icon-plane icons"></i>
+                            <div class="content">
+                                <h3>Tekin & Teskor yetkazib berish</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-6">
+                        <div class="feature-box"> <i class="icon-earphones-alt icons"></i>
+                            <div class="content">
+                                <h3>Tezkor aloqa 24/7 mijozlar uchun</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-6">
+                        <div class="feature-box"> <i class="icon-like icons"></i>
+                            <div class="content">
+                                <h3>100% Kafolat</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-6">
+                        <div class="feature-box last"> <i class="icon-tag icons"></i>
+                            <div class="content">
+                                <h3>Ajoyib kunlik chegirmalar</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JTV Home Slider -->
+        <div class="jtv-slideshow">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-md-push-3 col-sm-12">
+                        <div id='jtv-rev_slider_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
+                            <div id='jtv-rev_slider' class='rev_slider fullwidthabanner'>
+                                <ul>
+                                    <li data-transition='fade' data-slotamount='7' data-masterspeed='1000' data-thumb='{% static 'site/images/extra/1.jpg' %}'><img src="{% static 'site/images/extra/6.jpg' %}" alt="slide-img" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
+                                        <div class="info">
+                                            <div class='tp-caption jtv-sub-title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;font-size: 14px'><span class="text-info bg-primary" style="padding: 2px">Maktab o'quvchilari uchun</span> </div>
+                                            <div class='tp-caption jtv-large-title sfl  tp-resizeme' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'><span style="padding: 5px" class="bg-primary text-info">To'plamlar</span> </div>
+                                            <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="jtv-shop-now-btn" style="background-color: #00b9f5">Batafsil</a> </div>
+                                        </div>
+                                    </li>
+                                    <li data-transition='fade' data-slotamount='7' data-masterspeed='1000' data-thumb='{% static 'site/images/extra/2.jpg' %}'><img src="{% static 'site/images/extra/2.jpg' %}" alt="slide-img" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
+                                        <div class="info">
+                                            <div class='tp-caption jtv-sub-title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;font-size: 14px'><span class="text-info bg-primary" style="padding: 2px">Eng ko'p sotilayotganlar</span> </div>
+                                            <div class='tp-caption jtv-large-title sfl  tp-resizeme' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'><span style="padding: 5px" class="bg-primary text-info">Trendagilar</span> </div>
+                                            <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="jtv-shop-now-btn" style="background-color: #00b9f5">Batafsil</a> </div>
+                                        </div>
+                                    </li>
+                                    <li data-transition='fade' data-slotamount='7' data-masterspeed='1000' data-thumb='{% static 'site/images/extra/4.jpg' %}'><img src="{% static 'site/images/extra/4.jpg' %}" alt="slide-img" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
+                                        <div class="info">
+                                            <div class='tp-caption jtv-sub-title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;font-size: 14px'><span class="text-info bg-primary" style="padding: 2px">Chegirma narxda sotilayotganalar</span> </div>
+                                            <div class='tp-caption jtv-large-title sfl  tp-resizeme' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'><span style="padding: 5px" class="bg-primary text-info">Chegirmalar</span> </div>
+                                            <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="jtv-shop-now-btn" style="background-color: #00b9f5">Batafsil</a> </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end JTV Home Slider -->
+
+                    <!-- hot deal products -->
+                    <div class="col-md-3 hot-deal col-md-pull-9 col-sm-5">
+                        <div class="slider-items-products">
+                            <div id="hot-deal-slider" class="product-flexslider hidden-buttons">
+                                <div class="slider-items slider-width-col4">
+                                    {% for product in products_new_sales %}
+                                        <div class="item">
+                                        <div class="item-inner">
+                                            <div class="item-img">
+                                                <div class="item-img-info">
+                                                    <a href="#" title="Product Title Here" class="product-image"> <img src="/{{ product.foto }}" class="img-fluid" style="height: 270px" alt="Product Title Here"></a>
+                                                    <div class="hot-label hot-top-left">35% chegirma</div>
+                                                    <div class="jtv-box-hover">
+                                                        <ul class="add-to-links">
+                                                            <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                            <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                            <li><a class="link-compare" href="{% url 'show_product' id=product.id %}"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="item-info">
+                                                <div class="info-inner">
+                                                    <div class="item-title"> <a href="{% url 'show_product' id=product.id %}" title="Product Title Here">
+                                                        {{ product.name }}</a></div>
+                                                    <div class="item-content">
+                                                        <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                        <div class="item-price">
+                                                            <div class="price-box">
+                                                                <del class="price">{{ product.cost_sell}} so'm</del>
+                                                                <span class="regular-price"> <span class="price">{{ product.cost_discount }} so'm</span> </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="action">
+                                                            <button data-original-title="Add to Cart" title="" type="button" class="button btn-cart"><span>Savatga qo'shish</span> </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="jtv-box-timer">
+                                                    <div class="countbox_1 timer-grid"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jtv-top-banner">
+            <div class="container">
+                <div class="category-product">
+                    <div class="navbar nav-menu">
+                        <div class="navbar-collapse">
+                            <div class="jtv-title">
+                                <h2>Maktab o'quvchilari uchun to'plamlar</h2>
+                                <br>
+                            </div>
+
+                            <!--                             <div class="tab-panel active" id="tab-1">-->
+                            <!--                            <div class="category-products">-->
+                            <!--                                <ul class="products-grid">-->
+                            <!--                                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">-->
+                            <!--                                        <div class="item-inner">-->
+
+                            <div class="row products-grid" id="1-term">
+                                <div class="col-md-4 item">
+                                    <div class="content item-inner">
+                                        <div class="new-label new-top-right">new</div>
+                                        <a href="{% url 'set_by_class' id=1 %}" >
+                                            <div class="content-overlay"></div>
+                                            <div>
+                                                <img class="content-image " src="{% static 'site/images/extra/6.jpg' %}" style="height: 250px;width: 100%;">
+                                            </div>
+                                            <div class="content-details fadeIn-top">
+                                                <h3>1-SINF</h3>
+                                                <p style="font-size: 15px">Tayyor to'plamlar tezkor sotib oling</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 item">
+                                    <div class="content item-inner">
+                                        <div class="new-label new-top-right">new</div>
+                                        <a href="{% url 'set_by_class' id=2 %}" target="_blank">
+                                            <div class="content-overlay"></div>
+
+                                            <img class="content-image" src="{% static 'site/images/extra/4.jpg' %}" style="height: 250px;width: 100%;">
+                                            <div class="content-details fadeIn-top">
+                                                <h3>2-SINF</h3>
+                                                <p style="font-size: 15px">Tayyor to'plamlar tezkor sotib oling</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 item">
+                                    <div class="content item-inner">
+                                        <div class="new-label new-top-right">new</div>
+                                        <a href="{% url 'set_by_class' id=3 %}" target="_blank">
+                                            <div class="content-overlay"></div>
+                                            <img class="content-image" src="{% static 'site/images/extra/2.jpg' %}" style="height: 250px;width: 100%;">
+                                            <div class="content-details fadeIn-top">
+                                                <h3>3-SINF</h3>
+                                                <p style="font-size: 15px">Tayyor to'plamlar tezkor sotib oling</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <button class="btn btn-primary" style="float: right"><a href="{% url 'sets' %}" style="color:whitesmoke;;"><i class="fa fa-search-plus"></i> Ko'proq ko'rish</a></button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <section class="jtv-bestsell-section1">
+            <div class="container">
+
+            </div>
+        </section>
+
+        <section class="jtv-bestsell-section">
+            <div class="container">
+                <div class="slider-items-products">
+                    <div class="bestsell-block">
+                        <div class="jtv-block-inner">
+                            <div class="block-title">
+                                <h2>Eng ko'p sotilganlar mahsulotlar</h2>
+                            </div>
+                        </div>
+
+                        <div id="bestsell-slider" class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col4 products-grid block-content">
+                                <div class="item">
+                                    <div class="item-inner">
+                                        <div class="item-img">
+                                            <div class="item-img-info">
+                                                <a class="product-image" title="Product Title Here" ref=" single_product.html "> <img alt="Product Title Here" src="{% static 'site/images/products/img15.jpg' %}"> </a>
+                                                <div class="jtv-box-hover">
+                                                    <ul class="add-to-links">
+                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-compare" href="#"><i class="fa fa-eye"></i><span class="hidden">Show</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info-inner">
+                                                <div class="item-title"> <a title="Product Title Here" ref="single_product.html"> Product Title Here </a> </div>
+                                                <div class="item-content">
+                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    <div class="item-price">
+                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-inner">
+                                        <div class="item-img">
+                                            <div class="item-img-info">
+                                                <a class="product-image" title="Product Title Here" ref=" single_product.html "> <img alt="Product Title Here " src="{% static 'site/images/products/img14.jpg' %}"> </a>
+                                                <div class="jtv-box-hover">
+                                                    <ul class="add-to-links">
+                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-compare" href="#"><i class="fa fa-eye"></i><span class="hidden">Show</span></a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info-inner">
+                                                <div class="item-title"> <a title="Product Title Here" ref="single_product.html"> Product Title Here </a> </div>
+                                                <div class="item-content">
+                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    <div class="item-price">
+                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-inner">
+                                        <div class="item-img">
+                                            <div class="item-img-info">
+                                                <a class="product-image" title="Product Title Here" ref=" single_product.html "> <img alt="Product Title Here " src="{% static 'site/images/products/img13.jpg' %}"> </a>
+                                                <div class="new-label new-top-left">new</div>
+                                                <div class="jtv-box-hover">
+                                                    <ul class="add-to-links">
+                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-compare" href="#"><i class="fa fa-eye"></i><span class="hidden">Show</span></a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info-inner">
+                                                <div class="item-title"> <a title="Product Title Here" ref="single_product.html"> Product Title Here </a> </div>
+                                                <div class="item-content">
+                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    <div class="item-price">
+                                                        <div class="price-box">
+                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
+                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-inner">
+                                        <div class="item-img">
+                                            <div class="item-img-info">
+                                                <a class="product-image" title="Product Title Here" ref=" single_product.html "> <img alt="Product Title Here " src="{% static 'site/images/products/img12.jpg' %}"> </a>
+                                                <div class="jtv-box-hover">
+                                                    <ul class="add-to-links">
+                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-compare" href="#"><i class="fa fa-eye"></i><span class="hidden">Show</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info-inner">
+                                                <div class="item-title"> <a title="Product Title Here" ref="single_product.html"> Product Title Here </a> </div>
+                                                <div class="item-content">
+                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    <div class="item-price">
+                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-inner">
+                                        <div class="item-img">
+                                            <div class="item-img-info">
+                                                <a class="product-image" title="Product Title Here" ref=" single_product.html "> <img alt="Product Title Here " src="{% static 'site/images/products/img11.jpg' %}"> </a>
+                                                <div class="jtv-box-hover">
+                                                    <ul class="add-to-links">
+                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-compare" href="compare.html"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info-inner">
+                                                <div class="item-title"> <a title="Product Title Here" ref="single_product.html"> Product Title Here </a> </div>
+                                                <div class="item-content">
+                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    <div class="item-price">
+                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="item-inner">
+                                        <div class="item-img">
+                                            <div class="item-img-info">
+                                                <a class="product-image" title="Product Title Here" ref=" single_product.html "> <img alt="Product Title Here " src="{% static 'site/images/products/img10.jpg' %}"> </a>
+                                                <div class="new-label new-top-left">new</div>
+                                                <div class="jtv-box-hover">
+                                                    <ul class="add-to-links">
+                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-compare" href="compare.html"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info-inner">
+                                                <div class="item-title"> <a title="Product Title Here" ref="single_product.html"> Product Title Here </a> </div>
+                                                <div class="item-content">
+                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    <div class="item-price">
+                                                        <div class="price-box">
+                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
+                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <div class="jtv-bottom-banner-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="jtv-img-box">
+                            <a href="#"> <img src="{% static 'site/images/extra/bags/6.jpg' %}" style="width: 100%;height: 240px" alt="bottom banner">
+                                <div class="jtv-banner-info"> <span class=""><b>Istalgan turdaki ruchkalar</b> </span>
+                                    <h3 style="color: red"><b class="bg-danger">Ruchkalar olami</b></h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="jtv-img-box">
+                            <a href="#"> <img src="{% static 'site/images/extra/bags/5.jpg' %}" style="width: 100%;height: 240px" alt="bottom banner">
+                                 <div class="jtv-banner-info"> <span><b>Istalgan turdaki qalamlar</b> </span>
+                                    <h3 style="color: red"><b class="bg-danger">Qalamlar olami</b></h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="jtv-img-box">
+                            <a href="#"> <img src="{% static 'site/images/extra/bags/3.jpg' %}" style="width: 100%;height: 240px" alt="bottom banner">
+                                 <div class="jtv-banner-info"> <span><b>Istalgan turdaki daftarlar</b> </span>
+                                    <h3 style="color: red"><b class="bg-danger">Daftarlar olami</b></h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <section class="jtv-bestsell-section">
+            <div class="container">
+                <div class="slider-items-products">
+                    <div class="bestsell-block">
+                        <div class="jtv-block-inner">
+                            <div class="block-title">
+                                <h2>Yangi chegirmalar</h2>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="bestsell-slider" class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col4 products-grid block-content">
+
+                                {% for product in products_new_sales %}
+                                    <div class="item">
+                                    <div class="item-inner">
+                                        <div class="item-img">
+                                            <div class="item-img-info">
+                                                <a class="product-image" title="Product Title Here" ref="single_product.html ">
+                                                    <img alt="Product Title Here " src="/{{ product.foto }}" style="height: 270px">
+                                                </a>
+                                                <div class="new-label new-top-left"><b style="font-size: 13px">Chegirma</b></div>
+                                                <div class="jtv-box-hover">
+                                                    <ul class="add-to-links">
+                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-compare" href="{% url 'show_product' id=product.id %}"><i class="fa fa-eye"></i><span class="hidden">Show</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info-inner">
+                                                <div class="item-title"> <a title="Product Title Here" ref="single_product.html">
+                                                    {{ product.name}} </a> </div>
+                                                <div class="item-content">
+                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    <div class="item-price">
+                                                       <div class="price-box">
+                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{product.cost_discount}} so'm</span> </p>
+                                                             <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product.cost_sell}} so'm</span> </p>
+                                                       </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Savatga qo'shish</span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+            <div class="jtv-bottom-banner-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="jtv-img-box">
+                            <a href="#"> <img src="{% static 'site/images/extra/bags/2.jpg' %}" style="width: 100%;height: 240px" alt="bottom banner">
+                                <div class="jtv-banner-info"> <span class=""><b>Istalgan turdaki so'mkalar</b> </span>
+                                    <h3 style="color: red"><b class="bg-danger">So'mkalar olami</b></h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="jtv-img-box">
+                            <a href="#"> <img src="{% static 'site/images/extra/bags/6.png' %}" style="width: 100%;height: 240px" alt="bottom banner">
+                                <div class="jtv-banner-info"> <span class=""><b>Matematik to'plamlar</b> </span>
+                                    <h3 style="color: red"><b class="bg-danger">Xisob kitob qurollari</b></h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="jtv-img-box">
+                            <a href="#"> <img src="{% static 'site/images/extra/bags/2.jpeg' %}" style="width: 100%;height: 240px" alt="bottom banner">
+                                <div class="jtv-banner-info"> <span class=""><b>Istalgan turdaki komputerlar uchun so'mkalar</b> </span>
+                                    <h3 style="color: red"><b class="bg-danger">Komputer so'mkalari</b></h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <section class="jtv-bestsell-section">
+            <div class="container">
+                <div class="slider-items-products">
+                    <div class="bestsell-block">
+                        <div class="jtv-block-inner">
+                            <div class="block-title">
+                                <h2>Yangi maxsulotlar</h2>
+                            </div>
+                        </div>
+
+                        <div id="bestsell-slider" class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col4 products-grid block-content">
+                                {% for product in products_new %}
+                                    <div class="item">
+                                    <div class="item-inner">
+                                        <div class="item-img">
+                                            <div class="item-img-info">
+                                                <a class="product-image" title="Product Title Here" ref="single_product.html ">
+                                                    <img alt="Product Title Here " src="/{{ product.foto }}" style="height: 270px">
+                                                </a>
+                                                <div class="new-label new-top-left" style="background-color: red"><b style="font-size: 13px">Yangi</b></div>
+                                                <div class="jtv-box-hover">
+                                                    <ul class="add-to-links">
+                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-compare" href="compare.html"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info-inner">
+                                                <div class="item-title"> <a title="Product Title Here" ref="single_product.html">
+                                                    {{ product.name}} </a> </div>
+                                                <div class="item-content">
+                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                    <div class="item-price">
+                                                       <div class="price-box">
+                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{product.cost_discount}} so'm</span> </p>
+                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product.cost_sell}} so'm</span> </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Savatga qo'shish</span> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- End Bestsell Slider -->
+
+        <!--        <div class="jtv-testimonial-block">-->
+        <!--            <div class="container">-->
+        <!--                <div class="row">-->
+        <!--                    <div class="col-md-12" data-wow-delay="0.2s">-->
+        <!--                        <div class="block-title">-->
+        <!--                            <h2>What People are saying</h2>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">-->
+        <!--                            &lt;!&ndash; Bottom Carousel Indicators &ndash;&gt;-->
+        <!--                            <ol class="carousel-indicators">-->
+        <!--                                <li data-target="#quote-carousel" data-slide-to="0"><img class="img-responsive " src="images/testimonials-img1.jpg" alt=""> </li>-->
+        <!--                                <li data-target="#quote-carousel" data-slide-to="1"><img class="img-responsive" src="images/testimonials-img2.jpg" alt=""> </li>-->
+        <!--                                <li data-target="#quote-carousel" data-slide-to="2" class="active"><img class="img-responsive" src="images/testimonials-img3.jpg" alt=""> </li>-->
+        <!--                                <li data-target="#quote-carousel" data-slide-to="3"><img class="img-responsive" src="images/testimonials-img4.jpg" alt=""> </li>-->
+        <!--                                <li data-target="#quote-carousel" data-slide-to="4"><img class="img-responsive" src="images/testimonials-img5.jpg" alt=""> </li>-->
+        <!--                            </ol>-->
+
+        <!--                            &lt;!&ndash; Carousel Slides / Quotes &ndash;&gt;-->
+        <!--                            <div class="carousel-inner text-center">-->
+
+        <!--                                &lt;!&ndash; Quote 1 &ndash;&gt;-->
+        <!--                                <div class="item">-->
+        <!--                                    <blockquote>-->
+        <!--                                        <div class="row">-->
+        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
+        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
+        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. !</p>-->
+        <!--                                                <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, XYZ Softwear</strong></div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                    </blockquote>-->
+        <!--                                </div>-->
+        <!--                                &lt;!&ndash; Quote 2 &ndash;&gt;-->
+        <!--                                <div class="item">-->
+        <!--                                    <blockquote>-->
+        <!--                                        <div class="row">-->
+        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
+        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
+        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>-->
+        <!--                                                <div class="holder-info"><strong class="name">John Doe</strong> <strong class="designation">CEO, ABC Softwear</strong></div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                    </blockquote>-->
+        <!--                                </div>-->
+        <!--                                &lt;!&ndash; Quote 3 &ndash;&gt;-->
+        <!--                                <div class="item active">-->
+        <!--                                    <blockquote>-->
+        <!--                                        <div class="row">-->
+        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
+        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
+        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>-->
+        <!--                                                <div class="holder-info"> <strong class="name">John Doe</strong> <strong class="designation">Managing Director</strong></div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                    </blockquote>-->
+        <!--                                </div>-->
+        <!--                                &lt;!&ndash; Quote 4 &ndash;&gt;-->
+        <!--                                <div class="item">-->
+        <!--                                    <blockquote>-->
+        <!--                                        <div class="row">-->
+        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
+        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
+        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>-->
+        <!--                                                <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, XYZ Softwear</strong></div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                    </blockquote>-->
+        <!--                                </div>-->
+        <!--                                &lt;!&ndash; Quote 5 &ndash;&gt;-->
+        <!--                                <div class="item">-->
+        <!--                                    <blockquote>-->
+        <!--                                        <div class="row">-->
+        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
+        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
+        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>-->
+        <!--                                                <div class="holder-info"><strong class="name">John Doe</strong> <strong class="designation">CEO, ABC Softwear</strong></div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                    </blockquote>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+
+        <!--                            &lt;!&ndash; Carousel Buttons Next/Prev &ndash;&gt;-->
+        <!--                            <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a> <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>                            </div>-->
+        <!--                    </div>-->
+
+        <!--                </div>-->
+        <!--            </div>-->
+
+
+        <!--        </div>-->
+    </div>
+
+    <!-- Special Product slider -->
+
+
+    <!-- Latest Blog -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="blog-outer-container">
+                    <div class="jtv-title">
+                        <h2>Yangiliklar</h2>
+                    </div>
+                    <div class="blog-inner">
+                        <div class="col-sm-4">
+                            <div class="entry-thumb">
+                                <a href="blog_single_post.html"> <img alt="Blog" src="{% static 'site/images/blog-img1.jpg' %}"> </a>
+                            </div>
+                            <div class="blog-preview_info">
+                                <h3><a href="blog_single_post.html">Winter Morning ShopMart</a></h3>
+                                <ul class="post-meta">
+                                    <li><i class="fa fa-user"></i><a href="#">admin</a> </li>
+                                    <li><i class="fa fa-comments"></i><a href="#">12 comments</a> </li>
+                                    <li><i class="fa fa-calendar"></i>2017-02-25</li>
+                                </ul>
+                                <div class="blog-preview_desc">Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.Lorem ipsum dolor.</div>
+                                <a class="blog-preview_btn" href="blog_single_post.html">Batafsil <i class="fa fa-long-arrow-right"></i></a> </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="entry-thumb">
+                                <a href="blog_single_post.html"> <img alt="Blog" src="{% static 'site/images/blog-img2.jpg' %}"> </a>
+                            </div>
+                            <div class="blog-preview_info">
+                                <h3><a href="blog_single_post.html">Perfect for promoting</a></h3>
+                                <ul class="post-meta">
+                                    <li><i class="fa fa-user"></i><a href="#">admin</a> </li>
+                                    <li><i class="fa fa-comments"></i><a href="#">45 comments</a> </li>
+                                    <li><i class="fa fa-calendar"></i>2017-04-05</li>
+                                </ul>
+                                <div class="blog-preview_desc">Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.Lorem ipsum dolor.</div>
+                                <a class="blog-preview_btn" href="blog_single_post.html">Barafsil <i class="fa fa-long-arrow-right"></i></a> </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="entry-thumb">
+                                <a href="blog_single_post.html"> <img alt="Blog" src="{% static 'site/images/blog-img3.jpg' %}"> </a>
+                            </div>
+                            <div class="blog-preview_info">
+                                <h3><a href="blog_single_post.html">Sed do eiusmod sit amet</a></h3>
+                                <ul class="post-meta">
+                                    <li><i class="fa fa-user"></i><a href="#">admin</a> </li>
+                                    <li><i class="fa fa-comments"></i><a href="#">85 comments</a> </li>
+                                    <li><i class="fa fa-calendar"></i>2017-05-05</li>
+                                </ul>
+                                <div class="blog-preview_desc">Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.Lorem ipsum dolor.</div>
+                                <a class="blog-preview_btn" href="blog_single_post.html">Batafsil <i class="fa fa-long-arrow-right"></i></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Latest Blog -->
+
+    <!-- Brand Logo -->
+
+{% endblock content %}

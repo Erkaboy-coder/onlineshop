@@ -1,0 +1,184 @@
+﻿{% extends 'index/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} To'plamlar list ko'rinishi {% endblock %}
+{#{% block title %} Янги Шартномалар {% endblock %}#}
+{% block stylecontent %}
+
+
+{% endblock stylecontent %}
+
+{% block content%}
+  
+  <!-- Breadcrumbs -->
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <ul>
+            <li class="home"> <a href="{% url 'index' %}" title="Go to Home Page">Bosh sahifa</a> <span>/</span> </li>
+            <li> <a href="{% url 'products_lists_by_category' id=one.id %}" title="">Mahsulotlar <b>({{ one.name }})</b></a> <span>/ </span> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Breadcrumbs End --> 
+  
+  <!-- Main Container -->
+  <section class="main-container col2-left-layout">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-sm-push-3">
+          <div class="category-description std">
+            <div class="slider-items-products">
+              <div id="category-desc-slider" class="product-flexslider hidden-buttons">
+                <div class="slider-items slider-width-col1 owl-carousel owl-Template"> 
+                  
+                  <!-- Item -->
+                  <div class="item"> <a href="#"><img alt="" src="{% static 'site/images/extra/6.jpg' %}" style="height: 450px"></a>
+                    <div class="cat-img-title cat-bg cat-box">
+                      <div class="small-tag text-info bg-primary">Maktab o'quvchilari uchun</div>
+                      <h2 class="cat-heading text-info bg-primary" style="padding: 2px">To'plamlar</h2>
+                    </div>
+                  </div>
+                  <!-- End Item --> 
+
+                  <!-- Item -->
+                   <div class="item"> <a href="#"><img alt="" src="{% static 'site/images/extra/3.jpg' %}" style="height: 450px"></a>
+                    <div class="cat-img-title cat-bg cat-box">
+                      <div class="small-tag text-info bg-primary">Maktab o'quvchilari uchun</div>
+                      <h2 class="cat-heading text-info bg-primary" style="padding: 2px">To'plamlar</h2>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <article class="col-main">
+            <h2 class="page-heading"> <span class="page-heading-title">Mahsulotlar <i class="text-primary">({{ one.name }})</i></span> </h2>
+            <div class="toolbar">
+              <div class="row">
+                <div class="col-md-4 col-sm-5">
+                  <div class="btn-group">
+                    <div id="grid-view" class="btn btn-default" data-toggle="tooltip" title="Grid"><a href="{% url 'products_by_category' id=one.id %}"><i class="fa fa-th"></i></a></div>
+                    <div id="list-view" class="btn btn-default active" data-toggle="tooltip" title="List"><a href="{% url 'products_lists_by_category' id=one.id %}"><i class="fa fa-th-list"></i></a></div>
+                  </div>
+                  <a href="#" id="compare-total">Ko'rsatish turi</a> </div>
+                <div class="col-sm-2 text-right sort-by">
+                  <label class="control-label" for="input-sort">Saralash:</label>
+                </div>
+                <div class="col-md-3 col-sm-2 text-right">
+                  <select id="input-sort" class="form-control col-sm-3">
+                    <option value="0" selected="selected">-- Kerakli to'plani tanlang --</option>
+                      {% for set in classess %}
+                        <option value="{{ set.id }}"> {{ set.name}} </option>
+                      {% endfor %}
+                  </select>
+                </div>
+                <div class="col-sm-1 text-right show-limit">
+                  <label class="control-label" for="input-limit">Ko'rsatish:</label>
+                </div>
+                <div class="col-sm-2 text-right">
+                  <select id="input-limit" class="form-control">
+                    <option value="" selected="selected">10</option>
+                    <option value="">20</option>
+                    <option value="">30</option>
+                    <option value="">40</option>
+                    <option value="">50</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="category-products">
+              <ol class="products-list" id="products-list">
+
+                {% for product in products %}
+                    <li class="item"  style="box-shadow: 5px 8px 5px 8px rgba(0,0,0,0.4);">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="show.html" title="Product Title Here">
+                            <img class="small-image" src="/{{ product.foto }}" STYLE="height: 250px" alt="Product Title Here">
+                          </a>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="product-name"><a href="show.html" title="Product Title Here">{{ product.name}}</a></h2>
+                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+                              <p class="rating-links"> <a href="#">2 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
+                            </div>
+                             <p id="info">{{ product.info|safe|striptags|truncatechars:100 }} <a class="link-learn" title="" href="show.html">Batafsil</a> </p>
+
+                            <div class="price-box">
+                              <p class="old-price"> <span class="price-label"></span> <span class="price"> {{product.cost_sell}} so'm</span> </p>
+                              <p class="special-price"> <span class="price-label"></span> <span class="price"> {{product.cost_discount}} so'm</span> </p>
+                            </div>
+                            <div class="actions">
+                              <button class="button btn-cart" title="Add to Cart" type="button"><span>Savatchaga qo'shish</span></button>
+                              <span class="add-to-links">
+                                  <a title="Add to Wishlist" class="button link-wishlist" href="wishlist.html"><span>Sevimlilarga qo'shish</span></a>
+                              </span>
+                            </div>
+                        </div>
+
+                      </div>
+                    </li>
+                {% endfor %}
+
+              </ol>
+            </div>
+            <div class="toolbar">
+              <div class="row">
+                <div class="col-sm-6 text-left">
+                  <ul class="pagination">
+                    <li class="active"><span>1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">&gt;</a></li>
+                    <li><a href="#">&gt;|</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-6 text-right">Showing 1 to 15 of 25 (2 Pages)</div>
+              </div>
+            </div>
+          </article>
+          <!--	///*///======    End article  ========= //*/// --> 
+        </div>
+        <div class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
+           <aside class="sidebar">
+
+
+
+          <div class="block block-list block-viewed">
+              <div class="block-title"> Categoriyalar </div>
+              <div class="block-content">
+                <ol id="recently-viewed-items">
+                    {% for category in categories %}
+                          <li class="item">
+                                <p class="product-name"><a href="{% url 'products_by_category' id=category.id %}"><i class="fa fa-angle-right"></i>{{ category.name }}</a></p>
+                          </li>
+                    {% endfor %}
+                </ol>
+              </div>
+          </div>
+
+            <div class="block block-list block-viewed">
+              <div class="block-title"> To'plamlar </div>
+              <div class="block-content">
+                <ol id="recently-viewed-items">
+                    {% for clas in classess %}
+                          <li class="item">
+                                <p class="product-name"><a href="{% url 'set_by_class' id=clas.id %}"><i class="fa fa-angle-right"></i>{{ clas.name }}</a></p>
+                          </li>
+                    {% endfor %}
+                </ol>
+              </div>
+            </div>
+
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Main Container End -->
+  <!-- Footer -->
+{% endblock content %}
