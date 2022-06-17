@@ -80,7 +80,7 @@
                               <ul class="add-to-links">
                                 <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
                                 <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                                <li><a class="link-compare" href="shop_list.html"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
+                                <li><a class="link-compare" href="{% url 'show_set_product' id=collection.id %}"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
                               </ul>
                             </div>
                           </div>

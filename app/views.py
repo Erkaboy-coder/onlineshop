@@ -17,15 +17,21 @@ def counter(request):
 
     return counter
 
+# def oderstore(request):
+#     orderstore = {}
+#     orderstore['orderstore'] = OrderStore.objects.all()
+#
+#     return orderstore
 
 def index(request):
     products = Products.objects.order_by('-id').all()
     categories = Category.objects.all()
+    ordersstore = OrderStore.objects.all()
 
     products_new_sales =  Products.objects.filter(sale_status=1).order_by('-id')[:10]
     products_new =  Products.objects.order_by('-id')[:10]
 
-    context = {'products':products,'categories':categories,'products_new_sales':products_new_sales, 'products_new':products_new}
+    context = {'products':products,'categories':categories,'products_new_sales':products_new_sales, 'products_new':products_new,'ordersstore':ordersstore}
     return render(request, 'index/index.html', context)
 
 def contact(request):
@@ -59,6 +65,30 @@ def show_product_list(request):
     else:
         return HttpResponse(0)
 
+# order
+def add_card(request):
+    if request.method == 'POST':
+        data = request.POST
+        id = data.get('id')
+        if id:
+            product = Products.objects.filter(id=id).first()
+            if product:
+                orderstore = OrderStore(product=product)
+                orderstore.save()
+        # category = Category.objects.filter(id=id).first()
+        # if category:
+        #     products = Products.objects.filter(category=category)
+        # print(subdivisions)
+        # pdowork = PdoWork.objects.filter(id=work.first().pdowork.id)
+
+        # return JsonResponse({'products': list(products.values())}, safe=False)
+        return HttpResponse(1)
+    else:
+        return HttpResponse(0)
+
+
+
+# order
 def sets(request):
     products = Products.objects.order_by('-id').all()
     products_sets = ProductSet.objects.order_by('-id').all()
@@ -343,19 +373,19 @@ def add_product_to_collection(request):
         collection.amount = collection.amount+1
 
         if collection.cost_sell:
-            collection.cost_sell = int(str(collection.cost_sell))+int(str(pr.cost_sell))
+            collection.cost_sell = int(str(collection.cost_sell))+int(product_amount)*int(str(pr.cost_sell))
         else:
-            collection.cost_sell = pr.cost_sell
+            collection.cost_sell = int(product_amount)*int(pr.cost_sell)
 
         if collection.cost_buy:
-            collection.cost_buy = int(str(collection.cost_buy))+int(str(pr.cost_buy))
+            collection.cost_buy = int(str(collection.cost_buy))+int(product_amount)*int(str(pr.cost_buy))
         else:
-            collection.cost_buy = pr.cost_buy
+            collection.cost_buy = int(product_amount)*int(pr.cost_buy)
 
         if collection.cost_discount:
-            collection.cost_discount = int(str(collection.cost_discount))+int(str(pr.cost_discount))
+            collection.cost_discount = int(str(collection.cost_discount))+int(product_amount)*int(str(pr.cost_discount))
         else:
-            collection.cost_discount = pr.cost_discount
+            collection.cost_discount = int(product_amount)*int(pr.cost_discount)
 
         collection.save()
 
@@ -373,17 +403,17 @@ def delete_collection_product(request,id):
     collection = Collection.objects.filter(id=products_set.collection.id).first()
 
     if collection.cost_sell:
-        collection.cost_sell = int(str(collection.cost_sell)) - int(str(product.cost_sell))
+        collection.cost_sell = int(str(collection.cost_sell)) - int(products_set.product_amount)*int(str(product.cost_sell))
     else:
         collection.cost_sell = ''
 
     if collection.cost_buy:
-        collection.cost_buy = int(str(collection.cost_buy)) - int(str(product.cost_buy))
+        collection.cost_buy = int(str(collection.cost_buy)) - int(products_set.product_amount)*int(str(product.cost_buy))
     else:
         collection.cost_buy = ''
 
     if collection.cost_discount:
-        collection.cost_discount = int(str(collection.cost_discount)) - int(str(product.cost_discount))
+        collection.cost_discount = int(str(collection.cost_discount)) - int(products_set.product_amount)*int(str(product.cost_discount))
     else:
         collection.cost_discount = ''
 

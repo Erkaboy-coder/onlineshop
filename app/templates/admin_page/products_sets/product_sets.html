@@ -89,7 +89,7 @@
                         <td style="width: 1%"><i>{{ forloop.counter }}</i></td>
                         <td><i>{{ collection.name }}</i></td>
                         <td>
-                            <i class="count_number" count="{% for product in products %}{% if product.collection.id == collection.id %}{{ product.product.id }},{% endif %}{% endfor %}"></i>
+                            <i>{{ collection.amount }}</i>
                         </td>
                         <td><i>{{ collection.cost_buy }}</i></td>
                         <td><i>{{ collection.cost_sell }}</i></td>

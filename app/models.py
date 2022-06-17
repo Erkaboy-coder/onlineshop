@@ -130,6 +130,20 @@ class ProductSet(models.Model):
     class Meta:
         verbose_name_plural = "ProductSet"
 
+class OrderStore(models.Model):
+    product = models.ForeignKey(Products, blank=True, null=True, on_delete=models.CASCADE, related_name='productstore')
+    collection = models.ForeignKey(Collection, blank=True, null=True, on_delete=models.CASCADE, related_name='productcollectionstore')
+
+    status = models.IntegerField(default=0, blank=True)
+    # status = 0 bolsa bu karzinkada turgan mahsulot hisoblanadi
+
+    active_time = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    def __str__(self):
+        return self.product.name
+    class Meta:
+        verbose_name_plural = "ProductStore"
+
 
 class Worker(BaseModel):
     user = models.OneToOneField(

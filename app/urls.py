@@ -23,6 +23,9 @@ urlpatterns = [
     re_path(r'^contact/$', views.contact, name='contact'),
     re_path(r'^show_product_list$', views.show_product_list, name='show_product_list'),
 
+    # order
+    re_path(r'^add_card$', views.add_card, name='add_card'),
+
 
     re_path(r'^login_page/$', views.login, name='login_page'),
     re_path(r'^admin_page/$', views.admin_page, name='admin_page'),
