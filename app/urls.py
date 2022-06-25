@@ -61,6 +61,8 @@ urlpatterns = [
     re_path(r'^confirm_to_collect/(?P<id>\d+)/$', views.confirm_to_collect, name='confirm_to_collect'),
     re_path(r'^confirm_order/(?P<id>\d+)/$', views.confirm_order, name='confirm_order'),
 
+    re_path(r'^finished_orders/$', views.finished_orders, name='finished_orders'),
+
 
 
     re_path(r'^app/static/(?P<path>.*)', serve, {'document_root': 'app/static/'}),

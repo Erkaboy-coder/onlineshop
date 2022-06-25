@@ -30,13 +30,14 @@ def index(request):
     products = Products.objects.order_by('-id').all()
     categories = Category.objects.all()
     ordersstore = OrderStore.objects.all()
+    most_saled = Products.objects.order_by('-status_trent')[:10]
 
     products_most_showed =  Products.objects.order_by('-show')[:10]
     trendproduct =  Products.objects.order_by('-show').first()
     products_new =  Products.objects.order_by('-id')[:10]
 
     context = {'products':products,'categories':categories,'products_most_showed':products_most_showed, 'products_new':products_new,'ordersstore':ordersstore,
-               'trendproduct':trendproduct}
+               'trendproduct':trendproduct,'most_saled':most_saled}
     return render(request, 'index/index.html', context)
 
 def contact(request):
@@ -530,10 +531,18 @@ def new_orders(request):
     return render(request, 'admin_page/orders/orders.html', context)
 
 @login_required(login_url='/sign_in')
+def finished_orders(request):
+    orders = Order.objects.filter(status=2).all()
+
+    context = {'orders': orders,'counter': counter(request)}
+
+    return render(request, 'admin_page/finished_orders/orders.html', context)
+
+@login_required(login_url='/sign_in')
 def show_order(request,id):
 
     user = Worker.objects.filter(id=id).first()
-    orders = Order.objects.filter(status=0).filter(user=user).all()
+    orders = Order.objects.filter(~Q(status=2)).filter(user=user).all()
     costs = 0
     for i in orders:
         costs = costs + int(i.product.cost_discount)
@@ -546,7 +555,7 @@ def show_order(request,id):
 def delete_order(request,id):
 
     user = Worker.objects.filter(id=id).first()
-    orders = Order.objects.filter(status=0).filter(user=user).all()
+    orders = Order.objects.filter(user=user).all()
     for i in orders:
         i.delete()
 
@@ -556,7 +565,7 @@ def delete_order(request,id):
 def confirm_to_collect(request,id):
 
     user = Worker.objects.filter(id=id).first()
-    orders = Order.objects.filter(status=0).filter(user=user).all()
+    orders = Order.objects.filter(user=user).all()
     for i in orders:
         i.status = 1
         i.save()
@@ -567,9 +576,13 @@ def confirm_to_collect(request,id):
 def confirm_order(request,id):
 
     user = Worker.objects.filter(id=id).first()
-    orders = Order.objects.filter(status=0).filter(user=user).all()
+    orders = Order.objects.filter(user=user).all()
+
     for i in orders:
         i.status = 2
+        product = Products.objects.filter(id=i.product.id).first()
+        product.status_trent = product.status_trent + 1
+        product.save()
         i.save()
 
     return HttpResponseRedirect('/new_orders')

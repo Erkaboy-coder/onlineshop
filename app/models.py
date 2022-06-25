@@ -84,6 +84,7 @@ class Products(models.Model):
     foto = models.FileField("Foto", upload_to='app/static/photos/', blank=True)
     info = models.TextField(blank=True)
     status = models.IntegerField(default=0, blank=True)
+    status_trent = models.IntegerField(default=0, blank=True)
     show = models.IntegerField(default=0, blank=True)
     order_amount = models.IntegerField(default=0, blank=True)
     sale_status = models.IntegerField(default=0, blank=True)
