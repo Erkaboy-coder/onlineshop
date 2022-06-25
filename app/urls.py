@@ -28,8 +28,12 @@ urlpatterns = [
 
     re_path(r'^order_store/$', views.order_store, name='order_store'),
     re_path(r'^delete_product_from_store/(?P<id>\d+)/$', views.delete_product_from_store, name='delete_product_from_store'),
+    re_path(r'^change_product_amount$', views.change_product_amount, name='change_product_amount'),
 
+    re_path(r'^order_page/$', views.order_page, name='order_page'),
+    re_path(r'^order$', views.order, name='order'),
 
+# admin page
     re_path(r'^login_page/$', views.login, name='login_page'),
     re_path(r'^admin_page/$', views.admin_page, name='admin_page'),
     re_path(r'^sign_in/$', views.sign_in, name='sign_in'),
@@ -49,6 +53,15 @@ urlpatterns = [
     re_path(r'^product_add_to_collection/(?P<id>\d+)/$', views.product_add_to_collection, name='product_add_to_collection'),
     re_path(r'^delete_collection_product/(?P<id>\d+)/$', views.delete_collection_product, name='delete_collection_product'),
     re_path(r'^add_product_to_collection/$', views.add_product_to_collection, name='add_product_to_collection'),
+
+
+    re_path(r'^new_orders/$', views.new_orders, name='new_orders'),
+    re_path(r'^show_order/(?P<id>\d+)/$', views.show_order, name='show_order'),
+    re_path(r'^delete_order/(?P<id>\d+)/$', views.delete_order, name='delete_order'),
+    re_path(r'^confirm_to_collect/(?P<id>\d+)/$', views.confirm_to_collect, name='confirm_to_collect'),
+    re_path(r'^confirm_order/(?P<id>\d+)/$', views.confirm_order, name='confirm_order'),
+
+
 
     re_path(r'^app/static/(?P<path>.*)', serve, {'document_root': 'app/static/'}),
 ]

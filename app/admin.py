@@ -13,5 +13,6 @@ admin.site.register(ProductSet)
 admin.site.register(Products)
 
 admin.site.register(OrderStore)
+admin.site.register(Order)
 
 

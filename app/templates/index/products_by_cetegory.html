@@ -1,6 +1,8 @@
 ﻿{% extends 'index/master.html' %}
 {% load static %}
 {% load i18n %}
+ {% load l10n %}
+    {% load humanize %}
 {% block title %} To'plamlar {% endblock %}
 {#{% block title %} Янги Шартномалар {% endblock %}#}
 {% block stylecontent %}
@@ -92,8 +94,8 @@
                             <div class="item-content">
                               <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                               <div class="item-price">
-                                  <p class="old-price"> <span class="price-label"></span> <span class="price"> {{product.cost_sell}} so'm</span> </p>
-                                    <p class="special-price"> <span class="price-label"></span> <span class="price"> {{product.cost_discount}} so'm</span>
+                                  <p class="old-price"> <span class="price-label"></span> <span class="price"> {{product.cost_sell|intcomma}} so'm</span> </p>
+                                    <p class="special-price"> <span class="price-label"></span> <span class="price"> {{product.cost_discount|intcomma}} so'm</span>
                               </div>
                               <div class="action">
                                 <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Savatchaga qo'shish</span> </button>

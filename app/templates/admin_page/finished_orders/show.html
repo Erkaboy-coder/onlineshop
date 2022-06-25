@@ -1,0 +1,200 @@
+{% extends 'admin_page/master.html' %}
+{% load static %}
+{% load i18n %}
+ {% load l10n %}
+    {% load humanize %}
+{% block title %} Mahsulotlar {% endblock title %}
+{#<link rel="stylesheet" href="{% static 'admin_page/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}" />#}
+
+{% block content%}
+
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+{% block stylecontent %}
+
+{% endblock stylecontent %}
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Mahsulotlar</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="{% url 'admin_page' %}">Bosh sahifa</a>
+            </li>
+            <li class="breadcrumb-item active">Buyurtmachi {{ user.firstname }} zakazlari</li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-lg">
+            <div class="card-header">
+              <h3 class="card-title">Buyurtmachi {{ user.firstname }} zakazlari</h3>
+            </div>
+
+            <div class="card-body">
+              <table class="table table-hover table-bordered text-center ">
+                <thead class="bg-secondary">
+                  <tr class="text-light">
+                    <th>#</th>
+                    <th>Buyurtmachi</th>
+                    <th>Telefon raqami</th>
+                    <th>Manzil</th>
+                    <th>To'lov turi</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td style="width: 1%"><i>#</i></td>
+                            <td><i>{{ user }}</i></td>
+                            <td><i>{{ user.contact }}</i></td>
+                            <td>
+                                <i>
+                                    {% for order in orders %}
+                                        {% if order.user.id == user.id %}
+                                            {% if forloop.last %}
+                                                {{ order.address }}
+                                            {% endif %}
+                                        {% endif %} 
+                                    {% endfor %}
+                                </i>
+                            </td>
+                            <td>
+                                 <i class="text text-danger">
+                                    {% for order in orders %}
+                                        {% if order.user.id == user.id %}
+                                            {% if forloop.last %}
+                                                {% if order.payment_method == 1 %}
+                                                    <i class="fa fa-money"></i> Naqt pul bilan to'lash
+                                                    {% else %}
+                                                    <i class="fa fa-credit-card"></i> Plastik karta orqali
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </i>
+                            </td>
+                            <td>
+                                {% if user.status == '0' %}
+                                    <p class="text-success"><i class="fa fa-check"></i> <i>Fa'ol</i></p>
+                                {% endif %}
+                                {% if user.status == '1' %}
+                                    <p class="text-black"><i class="fa fa-warning"></i> <i>No fa'ol</i></p>
+                                {% endif %}
+                            </td>
+
+                        </tr>
+
+                </tbody>
+                <tfoot class="bg-secondary">
+                  <tr class="text-light">
+                       <th>#</th>
+                        <th>Buyurtmachi</th>
+                        <th>Telefon raqami</th>
+                        <th>Manzil</th>
+                        <th>To'lov turi</th>
+                        <th>Status</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+              <hr>
+            <div class="card-body">
+              <table id="example" class="table table-hover table-bordered text-center ">
+                <thead class="bg-secondary">
+                  <tr class="text-light">
+                    <th>#</th>
+                    <th>Mahsulot rasmi</th>
+                    <th>Mahsulot nomi</th>
+                    <th>Mahsulot chegirma narxi</th>
+                    <th>Mahsulot soni</th>
+                    <th>Buyurtma vaqti</th>
+                    <th>Buyurtma xolati</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+
+                    {% for order in orders %}
+                        <tr>
+                            <td style="width: 1%"><i>{{ forloop.counter }}</i></td>
+                            <td style="width: 15%"><img src="/{{ order.product.foto }}" style="width: 30%" alt=""></td>
+                            <td><i>{{ order.product }}</i></td>
+                            <td><i>{{ order.product.cost_discount|intcomma }} so'm</i></td>
+                            <td><i>{{ order.product_amount }}</i></td>
+                            <td><i>{{ order.active_time }}</i></td>
+                            <td>
+                                {% if order.status == 0 %}
+                                    <p class="text-warning"><i class="fa fa-warning"></i> <i>Yangi</i></p>
+                                {% endif %}
+                                {% if order.status == 1 %}
+                                    <p class="text-success"><i class="fa fa-check"></i> <i>Tasdiqlangan</i></p>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+
+                </tbody>
+                <tfoot class="bg-secondary">
+                  <tr class="text-light">
+                       <th>#</th>
+                    <th>Mahsulot rasmi</th>
+                    <th>Mahsulot nomi</th>
+                    <th>Mahsulot chegirma narxi</th>
+                    <th>Mahsulot soni</th>
+                    <th>Buyurtma vaqti</th>
+                      <th>Buyurtma xolati</th>
+                  </tr>
+                </tfoot>
+              </table>
+                <hr>
+                <div class="card bg-info shadow-lg" style="width: 40%">
+                        <div class="heading-counter" style="padding: 10px">Umumiy qiymati: <span><b>{{ costs|intcomma }} so'm</b></span> </div>
+                 </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-warning" style="width: 100%"><i class="fa fa-check"></i> <a href="{% url 'confirm_to_collect' id=user.id %}" class="text-white">Qabul qilish</a></button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-success" style="width: 100%"><i class="fa fa-check"></i><a href="{% url 'confirm_order' id=user.id %}" class="text-white"> Tasdiqlash</a></button>
+                    </div>
+
+                </div>
+                <hr>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{% endblock %} {% block scriptcontent %}
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>
+
+{% endblock scriptcontent %}

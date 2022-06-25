@@ -9,11 +9,14 @@ import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.db.models import Count
 
 def counter(request):
     counter = {}
     counter['all_products'] = Products.objects.all().count()
     counter['all_products_set'] = Collection.objects.all().count()
+    counter['new_orders'] = Order.objects.filter(status=0).values('user').annotate(dcount=Count('user')).order_by().count()
 
     return counter
 
@@ -56,11 +59,11 @@ def order_store(request):
     orders = OrderStore.objects.all()
     categories = Category.objects.all()
     ordersstore = OrderStore.objects.all()
+    products = Products.objects.order_by('-id')[:10]
     cost = 0
     for i in orders:
-        cost = cost + int(i.product.cost_discount)
-
-    context = {'orders': orders,'cost':cost,'categories':categories,'ordersstore':ordersstore}
+        cost = cost + int(i.product_amount)*int(i.product.cost_discount)
+    context = {'orders': orders,'cost':cost,'categories':categories,'ordersstore':ordersstore,'products':products}
     return render(request, 'index/orderstore.html', context)
 
 def delete_product_from_store(request,id):
@@ -68,6 +71,55 @@ def delete_product_from_store(request,id):
     order = OrderStore.objects.filter(product=id).first()
     order.delete()
     return redirect('/order_store')
+
+def order_page(request):
+    orders = OrderStore.objects.all()
+    categories = Category.objects.all()
+    ordersstore = OrderStore.objects.all()
+    products = Products.objects.order_by('-id')[:10]
+    cost = 0
+    for i in orders:
+        cost = cost + int(i.product_amount)*int(i.product.cost_discount)
+    context = {'orders': orders,'cost':cost,'categories':categories,'ordersstore':ordersstore,'products':products}
+    return render(request, 'index/order.html', context)
+
+
+def order(request):
+    if request.method == 'POST':
+        data = request.POST
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+        region = data.get('region')
+        address = data.get('address')
+        payment_method = data.get('payment_method')
+        contact = data.get('contact')
+
+        user = User.objects.filter(username=first_name).first()
+        orders = OrderStore.objects.all()
+
+        if not user:
+            user = User.objects.create_user(username=first_name, password=contact)
+            user.save()
+            worker = Worker(firstname=first_name,lastname=last_name,contact=contact,user=user)
+            worker.save()
+
+        else:
+            worker = Worker.objects.filter(user=user).first()
+            if not worker:
+                worker = Worker(firstname=first_name, lastname=last_name, contact=contact, user=user)
+                worker.save()
+
+        for i in orders:
+            order = Order(user=worker, product=i.product, product_amount=i.product_amount,payment_method=payment_method, address=address, region=region)
+            order.save()
+
+        for i in orders:
+            i.delete()
+
+        messages.success(request,"Xarid amalga oshirildi. Xarid chekini shaxsiy kabinetga kirib ko'rishingiz mumkin bo'ladi")
+        return HttpResponse(1)
+    else:
+        return HttpResponse(0)
 
 def show_product_list(request):
     if request.method == 'POST':
@@ -82,7 +134,18 @@ def show_product_list(request):
         return JsonResponse({'products': list(products.values())}, safe=False)
     else:
         return HttpResponse(0)
+def change_product_amount(request):
+    if request.method == 'POST':
+        data = request.POST
+        order_id = data.get('order_id')
+        product_amount = data.get('product_amount')
+        order = OrderStore.objects.filter(id=order_id).first()
+        order.product_amount = product_amount
+        order.save()
 
+        return HttpResponse(1)
+    else:
+        return HttpResponse(0)
 # order
 def add_card(request):
     if request.method == 'POST':
@@ -456,6 +519,60 @@ def delete_collection_product(request,id):
 
     messages.success(request, "Mahsulot to'plamdan olib tashlandi")
     return HttpResponseRedirect('/product_add_to_collection/%d/'%products_set.collection.id)
+
+
+@login_required(login_url='/sign_in')
+def new_orders(request):
+    orders = Order.objects.filter(~Q(status=2)).all()
+
+    context = {'orders': orders,'counter': counter(request)}
+
+    return render(request, 'admin_page/orders/orders.html', context)
+
+@login_required(login_url='/sign_in')
+def show_order(request,id):
+
+    user = Worker.objects.filter(id=id).first()
+    orders = Order.objects.filter(status=0).filter(user=user).all()
+    costs = 0
+    for i in orders:
+        costs = costs + int(i.product.cost_discount)
+
+    context = {'orders': orders,'counter': counter(request),'user':user,'costs':costs}
+
+    return render(request, 'admin_page/orders/show.html', context)
+
+@login_required(login_url='/sign_in')
+def delete_order(request,id):
+
+    user = Worker.objects.filter(id=id).first()
+    orders = Order.objects.filter(status=0).filter(user=user).all()
+    for i in orders:
+        i.delete()
+
+    return HttpResponseRedirect('/new_orders')
+
+@login_required(login_url='/sign_in')
+def confirm_to_collect(request,id):
+
+    user = Worker.objects.filter(id=id).first()
+    orders = Order.objects.filter(status=0).filter(user=user).all()
+    for i in orders:
+        i.status = 1
+        i.save()
+
+    return HttpResponseRedirect('/new_orders')
+
+@login_required(login_url='/sign_in')
+def confirm_order(request,id):
+
+    user = Worker.objects.filter(id=id).first()
+    orders = Order.objects.filter(status=0).filter(user=user).all()
+    for i in orders:
+        i.status = 2
+        i.save()
+
+    return HttpResponseRedirect('/new_orders')
 
 def login(request):
     context = {}

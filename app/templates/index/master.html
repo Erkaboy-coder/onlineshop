@@ -135,7 +135,7 @@
             <li><a href="#">Barcha bo'limlar</a>
                 <ul>
                     {% for category in categories %}
-                        <li><a href="{% url 'products_by_category' id=category.id %}"> <span>{{ category.name }}</span> </a></a></li>
+                        <li><a href="{% url 'products_by_category' id=category.id %}"> <span>{{ category.name }}</span> </a></li>
                     {% endfor %}
                 </ul>
             </li>
@@ -151,8 +151,8 @@
         <div class="jtv-top-link-mob">
             <ul class="links">
                 <li><a title="My Account" href="account_page.html">Kabinet</a> </li>
-                <li><a title="Wishlist" href="wishlist.html">Tanlanganlar</a> </li>
-                <li class="last"><a title="Login" href="account_page.html"><span>Kabinet</span></a> </li>
+                <li><a title="Wishlist" href="#">Tanlanganlar</a> </li>
+                <li class="last"><a title="Login" href="#"><span>Kabinet</span></a> </li>
             </ul>
         </div>
 
@@ -277,7 +277,7 @@
                                              <div class="actions">
                                                   <button class="btn-lg btn-success" title="Checkout" type="button" style="width: 100%">
                                                       <span>
-                                                            <a href="{% url 'order_store' %}" style="color:whitesmoke;">Sotib olish</a>
+                                                            <a href="{% url 'order_page' %}" style="color:whitesmoke;">Sotib olish</a>
                                                       </span>
                                                   </button>
                                                  <br><br>

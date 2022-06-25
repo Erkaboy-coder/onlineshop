@@ -1,0 +1,125 @@
+{% extends 'admin_page/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Mahsulotlar {% endblock title %}
+{#<link rel="stylesheet" href="{% static 'admin_page/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}" />#}
+
+{% block content%}
+
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+{% block stylecontent %}
+
+{% endblock stylecontent %}
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Mahsulotlar</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="{% url 'admin_page' %}">Bosh sahifa</a>
+            </li>
+            <li class="breadcrumb-item active">Yangi buyurtmalar</li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow-lg">
+            <div class="card-header">
+              <h3 class="card-title">Barcha yangi buyurtmalar</h3>
+            </div>
+
+            <div class="card-body">
+              <table id="example" class="table table-hover table-bordered text-center ">
+                <thead class="bg-secondary">
+                  <tr class="text-light">
+                    <th>#</th>
+                    <th>Buyurtmachi</th>
+                    <th>Manzil</th>
+                    <th>Buyurtma vaqti</th>
+                      <th>Status</th>
+                    <th>Sozlamalar</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+
+                {% regroup orders by user as orders1 %}
+                    {% for order2 in orders1 %}
+                        {% for order in order2.list %}
+									{% if forloop.last %}
+                                        <tr>
+                                            <td style="width: 1%"><i>#</i></td>
+                                            <td><i>{{ order.user }}</i></td>
+                                            <td><i>{{ order.address }}</i></td>
+                                            <td><i>{{ order.active_time }}</i></td>
+                                            <td>
+                                                {% if order.status == 0 %}
+                                                    <p class="text-warning"><i class="fa fa-warning"></i> <i>Yangi</i></p>
+                                                {% endif %}
+                                                {% if order.status == 1 %}
+                                                    <p class="text-warning"><i class="fa fa-check"></i> <i>Zakaz tayyorlanmoqda</i></p>
+                                                {% endif %}
+                                                {% if order.status == 2 %}
+                                                    <p class="text-success"><i class="fa fa-check"></i> <i> Tasdiqlangan</i></p>
+                                                {% endif %}
+                                            </td>
+
+                                            <td>
+                                                <div class="form-group">
+                                                    <a href="{% url 'delete_order' id=order.user.id %}" class="p-1"><i class="fa fa-trash-o"></i></a>
+                                                    <a href="{% url 'show_order' id=order.user.id %}" class="p-1"><i class="fa fa-eye"></i></a>
+
+                                                </div>
+                                            </td>
+                                          </tr>
+                                    {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+
+
+                </tbody>
+                <tfoot class="bg-secondary">
+                  <tr class="text-light">
+                       <th>#</th>
+                        <th>Buyurtmachi</th>
+                        <th>Manzil</th>
+                        <th>Buyurtma vaqti</th>
+                      <th>Status</th>
+                        <th>Sozlamalar</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{% endblock %} {% block scriptcontent %}
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>
+
+{% endblock scriptcontent %}

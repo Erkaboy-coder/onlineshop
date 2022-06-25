@@ -1,0 +1,389 @@
+﻿{% extends 'index/master.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %} Savatcha{% endblock %}
+{#{% block title %} Янги Шартномалар {% endblock %}#}
+{% block stylecontent %}
+ {% load l10n %}
+    {% load humanize %}
+
+{% endblock stylecontent %}
+
+<style>
+    body {
+    margin-top:30px;
+}
+.stepwizard-step p {
+    margin-top: 0px;
+    color:#666;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    /*opacity: 1 !important;
+    filter: alpha(opacity=100) !important;*/
+}
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
+    opacity:1 !important;
+    color:#bbb;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content:" ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-index: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+</style>
+{% block content%}
+
+  <!-- end nav -->
+  <!-- main-container -->
+  <div class="main-container col1-layout">
+    <div class="main container">
+      <div class="row">
+        <section class="col-sm-12 col-xs-12">
+          <div class="col-main">
+
+{#            <div class="page-title">#}
+{#              <h1 style="padding: 5px;" class="text-primary">Xarid bo'limi</h1>#}
+{#                <hr>#}
+{#            </div>#}
+            <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if messages %}
+                                    <ul class="text text-center" style="font-size:18px">
+                                        {% for message in messages %}
+                                            {% if message.tags == "error"  %}
+                                                <div class="alert alert-error text text-danger" style="background-color: #f7d7da">
+                                                    <b><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> </b> <span>{{ message }}</span>
+                                                </div>
+
+                                            {% else %}
+                                                <div class="alert alert-success text-success" style="background-color:#d4edda">
+                                                     <span class="text text-success">{{ message }}</span>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center">
+                    <div class="stepwizard justify-content-center">
+                    <div class="stepwizard-row setup-panel">
+                        <div class="stepwizard-step col-xs-3">
+                            <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                            <p><small>Ro'yxatdan o'tish</small></p>
+                        </div>
+                        <div class="stepwizard-step col-xs-3">
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                            <p><small>Yetkazib berish</small></p>
+                        </div>
+                        <div class="stepwizard-step col-xs-3">
+                            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                            <p><small>Tasdiqlash</small></p>
+                        </div>
+                        <div class="stepwizard-step col-xs-3">
+                            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                            <p><small>Yakunlash</small></p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+              <hr>
+              <hr>
+              <br>
+          {% csrf_token %}
+                <form role="form">
+                    <div class="panel panel-primary setup-content" id="step-1">
+                        <div class="panel-heading">
+                             <h3 class="panel-title">Ro'yxatdan o'tish</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label">Ismingiz <sup class="text-danger">*</sup></label>
+                                <input maxlength="100" style="width: 100%" type="text" id="first_name" name="first_name" required="required" class="form-control" placeholder="Ismingizni kiriting" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Familiyangiz</label>
+                                <input maxlength="100" style="width: 100%" type="text" id="last_name" name="last_name"  class="form-control" placeholder="Familiyangizni kiriting" />
+                            </div>
+                            <button class="btn btn-primary nextBtn pull-right" type="button">Keyingi qadam</button>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel panel-primary setup-content" id="step-2">
+                        <div class="panel-heading">
+                             <h3 class="panel-title">Yetkazib berish</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label">Viloyat yoki Shahar <sup class="text-danger">*</sup></label>
+                                <input maxlength="100" style="width: 100%" type="text" id="region" name="region" required="required" class="form-control" placeholder="Ismingizni kiriting" />
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Tuman yashash manzili <sup class="text-danger">*</sup></label>
+                                <textarea cols="30" style="width: 100%" type="text" id="address" required="required" name="address" class="form-control" placeholder="Yashash manzilingizni kiriting" rows="10"></textarea>
+                            </div>
+
+                            <button class="btn btn-primary nextBtn pull-right" type="button">Keyingi qadam</button>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary setup-content" id="step-3">
+                        <div class="panel-heading">
+                             <h3 class="panel-title">Tasdiqlash</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check" style="font-size: 18px;font-weight: bold">
+                                          <input class="form-check-input" type="radio" name="payment" value="1" checked id="cash">
+                                          <label class="form-check-label" for="cash">
+                                            Naqt pul orqali
+                                          </label>
+                                    </div>
+
+                                    <div class="form-check" style="font-size: 18px;font-weight: bold">
+                                          <input class="form-check-input" type="radio" value="0" name="payment" id="card" >
+                                          <label class="form-check-label" for="card">
+                                            Plastik karta oqali
+                                          </label>
+                                    </div>
+                                    <input type="text" name="payment_method" value="1" style="display: none" id="payment_method" >
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+
+
+
+                            <button class="btn btn-primary nextBtn pull-right" type="button">Keyingi qadam</button>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary setup-content" id="step-4">
+                        <div class="panel-heading">
+                             <h3 class="panel-title">Yakunlash</h3>
+                        </div>
+                        <div class="panel-body">
+                             <div class="form-group">
+                                <label class="control-label">Telefon raqamingiz <sup class="text-danger">*</sup></label>
+                                <input maxlength="100" style="width: 100%" type="text" id="contact" name="contact" required="required" class="form-control" placeholder="+998 9* *** ** **" />
+                            </div>
+                            <button class="btn btn-success pull-right" type="button" id="order">Xaridni amalga oshirish</button>
+                        </div>
+                    </div>
+                </form>
+
+
+
+                <div class="bg-info shadow-lg" style="width: 40%">
+                    <div class="heading-counter" style="padding: 10px">Savatchadadagi tavarlar: <span><b>{{ orders.count }} ta</b></span> </div>
+                </div>
+
+              <br>
+
+              <div class="box-border">
+                <div class="order-detail-content">
+                  <table class="table table-bordered table-responsive jtv-cart-summary">
+                    <thead>
+                      <tr class="text-center bg-info">
+                        <th class="text-center">Mahsulot rasmi</th>
+                        <th class="text-center">Ma'lumot</th>
+                        <th class="text-center">Soni</th>
+                        <th class="text-center">Mahsulot narxi</th>
+                        <th class="text-center">Mahsulot chegirma narxi</th>
+
+                        <th class="action">O'chirish</th>
+                      </tr>
+                    </thead>
+                  {% csrf_token %}
+                    <tbody>
+                        {% for order in orders %}
+                            <tr class="text-center">
+                                <td class="text-center"><a href="#"><img src="/{{ order.product.foto }}" style="width: 100%" alt="Product"></a></td>
+                                <td class="text-center"><p class="product-name"><a href="#"> {{ order.product.name }} </a></p></td>
+                                <td class="qty">
+                                    <input class="form-control input-sm product_amount" type="number" name="product_amount" value="{{ order.product_amount }}" order-id="{{ order.id }}" id="product_amount" min="1">
+                                </td>
+                                <td class="text-center"><span class="text-danger">{{ order.product.cost_sell|intcomma }} so'm</span></td>
+                                <td class="text-center"><span>{{ order.product.cost_discount|intcomma }} so'm</span></td>
+                                <td style="width: 10%" ><a href="{% url 'delete_product_from_store' id=order.product.id %}"><i class="fa fa-trash-o"></i></a></td>
+                          </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td ></td>
+                        <td ></td>
+                        <td colspan="3" style="font-size: 15px;font-weight: bold"><strong>Umimiy qiymati:</strong></td>
+                        <td colspan="2" style="font-size: 15px;font-weight: bold"><strong>{{ cost|intcomma }} so'm</strong></td>
+                      </tr>
+                    </tfoot>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+        </section>
+
+
+
+      </div>
+    </div>
+  </div>
+
+    <br>
+  <!--End main-container --> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(document).on('change',".product_amount",function(){
+            var data = new FormData();
+            data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
+            data.append("order_id", $(this).attr('order-id'));
+            var id = $(this).attr('order-id');
+            data.append("product_amount", $(this).val());
+            event.preventDefault();
+                  $.ajax({
+                  type: 'POST',
+                  url: '{% url 'change_product_amount' %}',
+                  data: data,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success: function (result){
+                        location.replace('/order_page');
+                  },
+
+                  error: function(){
+                        alert('Ajax da xatolik !! ');
+                     }
+            });
+        });
+
+    </script>
+
+        <script>
+        $(document).on('click',"#order",function(){
+            var data = new FormData();
+            data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
+            data.append("first_name", $('#first_name').val());
+            data.append("last_name", $('#last_name').val());
+            data.append("last_name", $('#last_name').val());
+            data.append("region", $('#region').val());
+            data.append("address", $('#address').val());
+            data.append("payment_method", $('#payment_method').val());
+            data.append("contact", $('#contact').val());
+
+            event.preventDefault();
+                  $.ajax({
+                  type: 'POST',
+                  url: '{% url 'order' %}',
+                  data: data,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success: function (result){
+                        location.replace('/order_page');
+                  },
+
+                  error: function(){
+                        alert('Ajax da xatolik !! ');
+                     }
+            });
+        });
+
+    </script>
+
+    <script>
+    $(document).ready(function () {
+
+    var navListItems = $('div.setup-panel div a'),
+        allWells = $('.setup-content'),
+        allNextBtn = $('.nextBtn');
+
+    allWells.hide();
+
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+            $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-success').addClass('btn-default');
+            $item.addClass('btn-success');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+
+    allNextBtn.click(function () {
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+
+        $(".form-group").removeClass("has-error");
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+
+        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+    });
+
+    $('div.setup-panel div a.btn-success').trigger('click');
+});
+    </script>
+
+    <script>
+     $(document).ready(function () {
+            $("input[type='radio']").click(function(){
+                var radioValue = $("input[name='payment']:checked").val();
+            if(radioValue){
+                $('#payment_method').val(radioValue);
+            }
+        });
+        });
+    </script>
+{% endblock content %}
