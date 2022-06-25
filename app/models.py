@@ -84,6 +84,7 @@ class Products(models.Model):
     foto = models.FileField("Foto", upload_to='app/static/photos/', blank=True)
     info = models.TextField(blank=True)
     status = models.IntegerField(default=0, blank=True)
+    show = models.IntegerField(default=0, blank=True)
     sale_status = models.IntegerField(default=0, blank=True)
     active_time = models.DateTimeField(auto_now=True, blank=True, null=True)
     amount_status = (
@@ -134,6 +135,7 @@ class OrderStore(models.Model):
     product = models.ForeignKey(Products, blank=True, null=True, on_delete=models.CASCADE, related_name='productstore')
     collection = models.ForeignKey(Collection, blank=True, null=True, on_delete=models.CASCADE, related_name='productcollectionstore')
 
+    product_amount = models.IntegerField(default=0, blank=True)
     status = models.IntegerField(default=0, blank=True)
     # status = 0 bolsa bu karzinkada turgan mahsulot hisoblanadi
 
@@ -142,7 +144,7 @@ class OrderStore(models.Model):
     def __str__(self):
         return self.product.name
     class Meta:
-        verbose_name_plural = "ProductStore"
+        verbose_name_plural = "OrderStore"
 
 
 class Worker(BaseModel):

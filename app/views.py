@@ -28,10 +28,12 @@ def index(request):
     categories = Category.objects.all()
     ordersstore = OrderStore.objects.all()
 
-    products_new_sales =  Products.objects.filter(sale_status=1).order_by('-id')[:10]
+    products_most_showed =  Products.objects.order_by('-show')[:10]
+    trendproduct =  Products.objects.order_by('-show').first()
     products_new =  Products.objects.order_by('-id')[:10]
 
-    context = {'products':products,'categories':categories,'products_new_sales':products_new_sales, 'products_new':products_new,'ordersstore':ordersstore}
+    context = {'products':products,'categories':categories,'products_most_showed':products_most_showed, 'products_new':products_new,'ordersstore':ordersstore,
+               'trendproduct':trendproduct}
     return render(request, 'index/index.html', context)
 
 def contact(request):
@@ -40,8 +42,8 @@ def contact(request):
 
     products_new_sales =  Products.objects.filter(sale_status=1).order_by('-id')[:10]
     products_new =  Products.objects.order_by('-id')[:10]
-
-    context = {'products':products,'categories':categories,'products_new_sales':products_new_sales, 'products_new':products_new}
+    ordersstore = OrderStore.objects.all()
+    context = {'products':products,'categories':categories,'products_new_sales':products_new_sales, 'products_new':products_new,'ordersstore':ordersstore}
     return render(request, 'index/contact_us.html', context)
 
 def error_page(request):
@@ -50,6 +52,22 @@ def error_page(request):
 
     context = {'products':products,'categories':categories}
     return render(request, 'index/404error.html', context)
+def order_store(request):
+    orders = OrderStore.objects.all()
+    categories = Category.objects.all()
+    ordersstore = OrderStore.objects.all()
+    cost = 0
+    for i in orders:
+        cost = cost + int(i.product.cost_discount)
+
+    context = {'orders': orders,'cost':cost,'categories':categories,'ordersstore':ordersstore}
+    return render(request, 'index/orderstore.html', context)
+
+def delete_product_from_store(request,id):
+
+    order = OrderStore.objects.filter(product=id).first()
+    order.delete()
+    return redirect('/order_store')
 
 def show_product_list(request):
     if request.method == 'POST':
@@ -75,14 +93,23 @@ def add_card(request):
             if product:
                 orderstore = OrderStore(product=product)
                 orderstore.save()
+        count = OrderStore.objects.all().count()
+        costs = OrderStore.objects.all()
+        cost = 0
+        for i in costs:
+            cost =  cost + int(i.product.cost_discount)
+        object = OrderStore.objects.filter(id=orderstore.id).first()
+
+        product = Products.objects.filter(id=object.product.id)
+
         # category = Category.objects.filter(id=id).first()
         # if category:
         #     products = Products.objects.filter(category=category)
         # print(subdivisions)
         # pdowork = PdoWork.objects.filter(id=work.first().pdowork.id)
-
-        # return JsonResponse({'products': list(products.values())}, safe=False)
-        return HttpResponse(1)
+        
+        return JsonResponse({'product': list(product.values()), 'count': count, 'cost':cost}, safe=False)
+        # return HttpResponse(1)
     else:
         return HttpResponse(0)
 
@@ -95,38 +122,40 @@ def sets(request):
     collections = Collection.objects.order_by('-id').all()
     classess = Classes.objects.all()
     categories = Category.objects.all()
-
-    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories}
+    ordersstore = OrderStore.objects.all()
+    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories,'ordersstore':ordersstore}
     return render(request, 'index/products_sets.html', context)
 
 def set_by_class(request,id):
-
+    ordersstore = OrderStore.objects.all()
     collections = Collection.objects.filter(sinf=id).all()
     sinf = Classes.objects.filter(id=id).first()
     classes = Classes.objects.all()
     categories = Category.objects.all()
-    context = {'collections':collections,'sinf':sinf,'categories':categories,'classess':classes}
+    context = {'collections':collections,'sinf':sinf,'categories':categories,'classess':classes,'ordersstore':ordersstore}
     return render(request, 'index/products_sets_by_class.html', context)
 
 def show_set_product(request,id):
-
+    ordersstore = OrderStore.objects.all()
     classes = Classes.objects.all()
     categories = Category.objects.all()
 
     collection = Collection.objects.filter(id=id).first()
     products = ProductSet.objects.filter(collection=collection).all()
 
-    context = {'categories':categories, 'classess':classes, 'products':products, 'collection':collection,'products':products}
+    context = {'categories':categories, 'classess':classes, 'products':products, 'collection':collection,'products':products,'ordersstore':ordersstore}
 
     return render(request, 'index/show_set_product.html', context)
 
 def show_product(request,id):
-
+    ordersstore = OrderStore.objects.all()
     classes = Classes.objects.all()
     categories = Category.objects.all()
     product = Products.objects.filter(id=id).first()
+    product.show=product.show+1
+    product.save()
     products = Products.objects.filter(category=product.category).filter(~Q(id=id)).order_by('-id')[:10]
-    context = {'product':product,'categories':categories,'classess':classes,'products':products}
+    context = {'product':product,'categories':categories,'classess':classes,'products':products,'ordersstore':ordersstore}
     return render(request, 'index/show_product.html', context)
 
 
@@ -136,18 +165,19 @@ def sets_list_view(request):
     products_sets = ProductSet.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
-    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories}
+    ordersstore = OrderStore.objects.all()
+    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories,'ordersstore':ordersstore}
     return render(request, 'index/shop_list_sets.html', context)
 
 
 def products_by_category(request,id):
     products = Products.objects.filter(category=id).all()
     one = Category.objects.filter(id=id).first()
-
+    ordersstore = OrderStore.objects.all()
     categories = Category.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
-    context = {'products': products, 'products_sets': products_sets, 'collections': collections, 'classess': classess,
+    context = {'products': products, 'products_sets': products_sets, 'collections': collections, 'classess': classess,'ordersstore':ordersstore,
                'categories': categories,'one':one}
     return render(request, 'index/products_by_cetegory.html', context)
 
@@ -155,32 +185,32 @@ def products_by_category(request,id):
 def products_lists_by_category(request,id):
     products = Products.objects.filter(category=id).all()
     one = Category.objects.filter(id=id).first()
-
+    ordersstore = OrderStore.objects.all()
     categories = Category.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
-    context = {'products': products, 'products_sets': products_sets, 'collections': collections, 'classess': classess,
+    context = {'products': products, 'products_sets': products_sets, 'collections': collections, 'classess': classess,'ordersstore':ordersstore,
                'categories': categories, 'one': one}
     return render(request, 'index/products_lists_by_categoy.html', context)
 
 def sale_products(request):
     categories = Category.objects.all()
     products = Products.objects.order_by('-id').filter(sale_status=1).all()
-
+    ordersstore = OrderStore.objects.all()
     products_sets = ProductSet.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
-    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories}
+    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories,'ordersstore':ordersstore}
     return render(request, 'index/sale_product.html', context)
 
 def new_products(request):
     categories = Category.objects.all()
     products = Products.objects.order_by('-id').all()
-
+    ordersstore = OrderStore.objects.all()
     products_sets = ProductSet.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
-    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories}
+    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories,'ordersstore':ordersstore}
     return render(request, 'index/new_product.html', context)
 
 @login_required(login_url='/sign_in')

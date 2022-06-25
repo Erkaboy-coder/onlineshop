@@ -1,4 +1,6 @@
 ﻿{% load static %}
+ {% load l10n %}
+    {% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,148 +132,19 @@
                 </div>
             </li>
             <li><a href="{% url 'index' %}">Bosh sahifa</a></li>
-            <li><a href="#">Pages</a>
+            <li><a href="#">Barcha bo'limlar</a>
                 <ul>
-                    <li><a href="shop_grid.html"><span>Shop Grid</span></a>
-                        <ul>
-                            <li>
-                                <a href="shop_grid_right.html"> <span>Shop Grid Right Sidebar</span> </a>
-                            </li>
-                            <li>
-                                <a href="shop_grid_fullwidth.html"> <span>Shop Grid Fullwidth</span> </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="shop_list.html"> <span>Shop List</span> </a>
-                        <ul>
-                            <li>
-                                <a href="shop_list_right.html"> <span>Shop List Right Sidebar</span> </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="show.html"> <span>Single Product</span> </a>
-                    </li>
-                    <li>
-                        <a href="shopping_cart.html"> <span>Shopping Cart</span> </a>
-                    </li>
-                    <li><a href="checkout.html"><span>Checkout</span></a> </li>
-                    <li>
-                        <a href="wishlist.html"> <span>Wishlist</span> </a>
-                    </li>
-                    <li><a href="compare.html"><span>Compare</span></a> </li>
-                    <li><a href="quick_view.html"><span>Quick View</span></a> </li>
-                    <li><a href="404error.html"><span>404 Error Page</span></a> </li>
+                    {% for category in categories %}
+                        <li><a href="{% url 'products_by_category' id=category.id %}"> <span>{{ category.name }}</span> </a></a></li>
+                    {% endfor %}
                 </ul>
             </li>
-            <li><a href="#">Smartphones</a>
-                <ul>
-                    <li> <a href="shop_grid.html"><span>tassel saddle bag</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Toaster Crossbody</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Piper Bag</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Leather Bag</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Canvas Bag</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>bucket bag</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Travel Accessories</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Gym Bags</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Fashion Waist Packs</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Messenger Bags</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>saddle bag</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Travel Duffels</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Umbrellas</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Waist Packs</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Travel Gear</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>curved boxy sling</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Luggage</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Briefcases</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Bowling</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Bucket Bag</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>floral lattice bag</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Crossbody Bag</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Clutch Handbag</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Hobo Shoulder</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Saddle Bag</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>Bag Accessories</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Wallet Wristlet</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Solo Premium </span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Laptop Bags</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Belts</span></a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="shop_grid.html">Camera & Photo</a>
-                <ul>
-                    <li> <a href="shop_grid.html"><span>Steve Madden</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Elegant </span></a> </li>
-                            <li> <a href="shop_grid.html"><span>sassy &amp; chic</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Women's Satchel</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Shoulder Bag</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>College Bags</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>fashion Backpack</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Rose Gold Saffiano</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Black Velvet</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Leather Handbags</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>Material Bag</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Sling Bag</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Diaper Bags</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Laptop Backpack</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Benetton Black </span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>Lino Perros</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Graphite Croco</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Swiss Military Red</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Hidesign</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Benetton</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>Aquatan</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>Travel Blue</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Charles & Keith</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>Clutches</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>wristlets</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="shop_grid.html"><span>Kenneth Cole</span></a>
-                        <ul>
-                            <li> <a href="shop_grid.html"><span>wallets</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>shoulder bags</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>leather totes</span></a> </li>
-                            <li> <a href="shop_grid.html"><span>satchels</span></a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="shop_grid.html">Laptop bags</a> </li>
-            <li><a href="shop_grid.html">Apple Store</a> </li>
-            <li><a href="shop_grid.html">Computers</a> </li>
+
+            <li><a href="{% url 'sets' %}">To'plamlar</a> </li>
+            <li><a href="{% url 'new_products' %}">Yangi mahsulotlar</a> </li>
+            <li><a href="{% url 'sale_products' %}">Chegirmalar</a> </li>
+            <li><a href="{% url 'sale_products' %}">Yangiliklar</a> </li>
+            <li><a href="{% url 'contact' %}">Bog'lanish</a> </li>
 
         </ul>
 
@@ -279,17 +152,13 @@
             <ul class="links">
                 <li><a title="My Account" href="account_page.html">Kabinet</a> </li>
                 <li><a title="Wishlist" href="wishlist.html">Tanlanganlar</a> </li>
-                <li><a title="Checkout" href="checkout.html">To'lovlar</a> </li>
-                <li><a title="Blog" href="blog.html"><span>Blog</span></a> </li>
-                <li class="last"><a title="Login" href="account_page.html"><span>Login</span></a> </li>
+                <li class="last"><a title="Login" href="account_page.html"><span>Kabinet</span></a> </li>
             </ul>
         </div>
 
     </div>
     <div id="page">
-        <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
+
 
         <!-- Header -->
         <header>
@@ -334,7 +203,7 @@
                                     <div class="links">
                                         <ul>
                                             <li> <a title="Wishlist" href="wishlist.html">Sevimlilar</a> </li>
-                                            <li> <a title="Checkout" href="checkout.html"><span class="hidden-xs">Xaridlar</span></a> </li>
+                                            <li> <a title="Checkout" href="orderstore.html"><span class="hidden-xs">Xaridlar</span></a> </li>
                                             <li>
                                                 <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> Ko'proq <span class="caret"></span></a>
                                                     <ul class="dropdown-menu">
@@ -362,33 +231,67 @@
                                 <!-- Top Cart -->
                                 <div class="mini-cart">
                                     <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
-                                        <a href="shopping_cart.html"> <span class="cart_count">{{ orderstore.orderstore.count }}</span><span class="price">Savatcha</span> </a>
+                                        <a href="#"> <span class="cart_count">{{ ordersstore.count }}</span><span>Savatcha</span> </a>
                                     </div>
+
                                     <div>
                                         <div class="jtv-top-cart-content">
 
-                                            <!--block-subtitle-->
-                                            <ul class="mini-products-list" id="cart-sidebar">
-                                                {% for product in ordersstore %}
+                                           <ul class="mini-products-list" id="cart-sidebar">
+                                                {% for order in ordersstore %}
                                                     <li class="item first">
                                                         <div class="item-inner">
-                                                            <a class="product-image" title="Product Title Here" ref="#"><img alt="Product Title Here" src="/{{ product.foto }}"> </a>
+                                                            <a class="product-image" title="Product Title Here" ref="#">
+                                                                <img alt="Product Title Here" src="/{{order.product.foto}}">
+                                                            </a>
                                                             <div class="product-details">
-                                                                <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                                <p class="product-name"><a href="#">{{ product.name}}</a> </p>
-                                                                <strong>1</strong> x <span class="price">{{ product.name }}</span> </div>
+                                                                <div class="access">
+                                                                    <a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a>
+                                                                </div>
+                                                                <p class="product-name"><a href="#">{{order.product.name}}</a> </p>
+                                                                <strong>1</strong> x <span class="price product_price" product-price="{{ order.product.cost_discount }}"><b>{{order.product.cost_discount|intcomma}}</b> so'm</span>
+                                                            </div>
                                                         </div>
                                                     </li>
                                                 {% endfor %}
+                                           </ul>
 
-                                            </ul>
+                                            <div class="container-fluid">
+                                                <div class="row bg-info" style="font-size: 15px">
+                                                    <div class="col-md-2 text-center">
+                                                        <b>Summa:</b>
+                                                    </div>
+                                                    <div class="col-md-4">
 
-                                            <!--actions-->
-                                            <div class="actions">
-                                                <button class="btn-checkout" title="Checkout" type="button" onClick="checkout.html"><span>Tozalash</span> </button>
-                                                <a href="shopping_cart.html" class="view-cart"><span>Sotib olish</span></a> </div>
+                                                    </div>
+                                                    <div class="col-md-6  text-center">
+                                                        <b class="p-10">
+                                                            <span class="order_prize" id="order_prize" order-costs="{% for foo in ordersstore %}{{ foo.product.cost_discount }},{% endfor %}"></span> so'm
+{#                                                            <span class="order_prize" id="order_prize"></span> so'm#}
+                                                        </b>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                             <div class="actions">
+                                                  <button class="btn-lg btn-success" title="Checkout" type="button" style="width: 100%">
+                                                      <span>
+                                                            <a href="{% url 'order_store' %}" style="color:whitesmoke;">Sotib olish</a>
+                                                      </span>
+                                                  </button>
+                                                 <br><br>
+                                                  <button class="btn-lg btn-primary" title="Checkout" type="button" style="width: 100%">
+                                                      <span>
+                                                            <a href="{% url 'order_store' %}" style="color:whitesmoke;">Savatga o'tish</a>
+                                                      </span>
+                                                  </button>
+
+                                              </div>
+
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -407,6 +310,10 @@
                                 </form>
                             </div>
                         </div>
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -414,6 +321,9 @@
         <!-- end header -->
 
         <!-- Navigation -->
+        <div class="alert alert-success" id="alert_save_message" style="position:fixed;top:100;right:30;z-index: 100;font-size:20px;display: none;opacity: 0.9">
+            <strong style="">Tabriklaymiz!</strong> Mahsulot savatga saqlandi.
+        </div>
 
         <nav>
             <div class="container">
@@ -470,8 +380,9 @@
                                             </ul>
                                         </div>
                                         <div class="col-2">
-                                            <div class="jtv-nav-image1">
-                                                <a title="" href="#"><img alt="menu_image" src="{% static 'site/images/menu-img1.jpg' %}"> </a>
+                                            <div class="jtv-nav-image1 justify-content-center">
+                                                <h2 class="text text-center">Eng ko'p ko'rilgan mahsulot</h2>
+                                                <a title="" href="#" class="text text-center"><img alt="menu_image" src="/{{ trendproduct.foto }}"> </a>
                                             </div>
                                         </div>
                                     </div>
@@ -512,7 +423,7 @@
                                 <li>
                                     <a href="shopping_cart.html"> <span>Shopping Cart</span> </a>
                                 </li>
-                                <li><a href="checkout.html"><span>Checkout</span></a> </li>
+                                <li><a href="orderstore.html"><span>Checkout</span></a> </li>
                                 <li>
                                     <a href="wishlist.html"> <span>Wishlist</span> </a>
                                 </li>
@@ -682,7 +593,23 @@
     </div>
 
     <!-- End Footer -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+        <script type="text/javascript">
+        $(document).ready(function(){
+        $('.order_prize').each(function(i,obj){
+            let text=$(this).attr('order-costs');
+            num=text.split(',');
+            let s=0;
+            for(let i in num){
+                if(num[i]!='')
+                  s += parseInt(num[i]);
+                  }
+                $('#order_prize').text(s);
+            });
+
+        });
+        </script>
     <!-- jquery js -->
     <script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
 

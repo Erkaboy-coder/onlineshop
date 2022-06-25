@@ -1,6 +1,8 @@
 ﻿{% extends 'index/master.html' %}
 {% load static %}
 {% load i18n %}
+ {% load l10n %}
+    {% load humanize %}
 {% block title %} Bosh sahifa{% endblock %}
 {#{% block title %} Янги Шартномалар {% endblock %}#}
 {% block stylecontent %}
@@ -85,7 +87,7 @@
                         <div class="slider-items-products">
                             <div id="hot-deal-slider" class="product-flexslider hidden-buttons">
                                 <div class="slider-items slider-width-col4">
-                                    {% for product in products_new_sales %}
+                                    {% for product in products_new %}
                                         <div class="item">
                                         <div class="item-inner">
                                             <div class="item-img">
@@ -110,8 +112,8 @@
                                                         <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                                                         <div class="item-price">
                                                             <div class="price-box">
-                                                                <del class="price">{{ product.cost_sell}} so'm</del>
-                                                                <span class="regular-price"> <span class="price">{{ product.cost_discount }} so'm</span> </span>
+                                                                <del class="price">{{ product.cost_sell|intcomma}} so'm</del>
+                                                                <span class="regular-price"> <span class="price">{{ product.cost_discount|intcomma }} so'm</span> </span>
                                                             </div>
                                                         </div>
                                                         <div class="action">
@@ -218,7 +220,7 @@
                     <div class="bestsell-block">
                         <div class="jtv-block-inner">
                             <div class="block-title">
-                                <h2>Eng ko'p sotilganlar mahsulotlar</h2>
+                                <h2>Eng ko'p sotilgan mahsulotlar</h2>
                             </div>
                         </div>
 
@@ -465,14 +467,14 @@
                     <div class="bestsell-block">
                         <div class="jtv-block-inner">
                             <div class="block-title">
-                                <h2>Yangi chegirmalar</h2>
+                                <h2>Eng ko'p ko'rilganlar</h2>
                             </div>
                         </div>
                         <hr>
                         <div id="bestsell-slider" class="product-flexslider hidden-buttons">
                             <div class="slider-items slider-width-col4 products-grid block-content">
 
-                                {% for product in products_new_sales %}
+                                {% for product in products_most_showed %}
                                     <div class="item">
                                     <div class="item-inner">
                                         <div class="item-img">
@@ -480,7 +482,7 @@
                                                 <a class="product-image" title="Product Title Here" ref="single_product.html ">
                                                     <img alt="Product Title Here " src="/{{ product.foto }}" style="height: 270px">
                                                 </a>
-                                                <div class="new-label new-top-left"><b style="font-size: 13px">Chegirma</b></div>
+                                                <div class="new-label new-top-left "><b style="font-size: 13px"><i class="fa fa-star-half-o"></i></b></div>
                                                 <div class="jtv-box-hover">
                                                     <ul class="add-to-links">
                                                         <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
@@ -498,8 +500,8 @@
                                                     <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                                                     <div class="item-price">
                                                        <div class="price-box">
-                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{product.cost_discount}} so'm</span> </p>
-                                                             <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product.cost_sell}} so'm</span> </p>
+                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{product.cost_sell|intcomma}} so'm</span> </p>
+                                                             <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product.cost_discount|intcomma}} so'm</span> </p>
                                                        </div>
                                                     </div>
                                                     <div class="action">
@@ -591,8 +593,8 @@
                                                     <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                                                     <div class="item-price">
                                                        <div class="price-box">
-                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{product.cost_discount}} so'm</span> </p>
-                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product.cost_sell}} so'm</span> </p>
+                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{product.cost_sell|intcomma}} so'm</span> </p>
+                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product.cost_discount|intcomma}} so'm</span> </p>
                                                         </div>
                                                     </div>
                                                     <div class="action">
@@ -611,100 +613,7 @@
             </div>
         </section>
 
-        <!-- End Bestsell Slider -->
 
-        <!--        <div class="jtv-testimonial-block">-->
-        <!--            <div class="container">-->
-        <!--                <div class="row">-->
-        <!--                    <div class="col-md-12" data-wow-delay="0.2s">-->
-        <!--                        <div class="block-title">-->
-        <!--                            <h2>What People are saying</h2>-->
-        <!--                        </div>-->
-
-        <!--                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">-->
-        <!--                            &lt;!&ndash; Bottom Carousel Indicators &ndash;&gt;-->
-        <!--                            <ol class="carousel-indicators">-->
-        <!--                                <li data-target="#quote-carousel" data-slide-to="0"><img class="img-responsive " src="images/testimonials-img1.jpg" alt=""> </li>-->
-        <!--                                <li data-target="#quote-carousel" data-slide-to="1"><img class="img-responsive" src="images/testimonials-img2.jpg" alt=""> </li>-->
-        <!--                                <li data-target="#quote-carousel" data-slide-to="2" class="active"><img class="img-responsive" src="images/testimonials-img3.jpg" alt=""> </li>-->
-        <!--                                <li data-target="#quote-carousel" data-slide-to="3"><img class="img-responsive" src="images/testimonials-img4.jpg" alt=""> </li>-->
-        <!--                                <li data-target="#quote-carousel" data-slide-to="4"><img class="img-responsive" src="images/testimonials-img5.jpg" alt=""> </li>-->
-        <!--                            </ol>-->
-
-        <!--                            &lt;!&ndash; Carousel Slides / Quotes &ndash;&gt;-->
-        <!--                            <div class="carousel-inner text-center">-->
-
-        <!--                                &lt;!&ndash; Quote 1 &ndash;&gt;-->
-        <!--                                <div class="item">-->
-        <!--                                    <blockquote>-->
-        <!--                                        <div class="row">-->
-        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
-        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
-        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. !</p>-->
-        <!--                                                <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, XYZ Softwear</strong></div>-->
-        <!--                                            </div>-->
-        <!--                                        </div>-->
-        <!--                                    </blockquote>-->
-        <!--                                </div>-->
-        <!--                                &lt;!&ndash; Quote 2 &ndash;&gt;-->
-        <!--                                <div class="item">-->
-        <!--                                    <blockquote>-->
-        <!--                                        <div class="row">-->
-        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
-        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
-        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>-->
-        <!--                                                <div class="holder-info"><strong class="name">John Doe</strong> <strong class="designation">CEO, ABC Softwear</strong></div>-->
-        <!--                                            </div>-->
-        <!--                                        </div>-->
-        <!--                                    </blockquote>-->
-        <!--                                </div>-->
-        <!--                                &lt;!&ndash; Quote 3 &ndash;&gt;-->
-        <!--                                <div class="item active">-->
-        <!--                                    <blockquote>-->
-        <!--                                        <div class="row">-->
-        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
-        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
-        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>-->
-        <!--                                                <div class="holder-info"> <strong class="name">John Doe</strong> <strong class="designation">Managing Director</strong></div>-->
-        <!--                                            </div>-->
-        <!--                                        </div>-->
-        <!--                                    </blockquote>-->
-        <!--                                </div>-->
-        <!--                                &lt;!&ndash; Quote 4 &ndash;&gt;-->
-        <!--                                <div class="item">-->
-        <!--                                    <blockquote>-->
-        <!--                                        <div class="row">-->
-        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
-        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
-        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>-->
-        <!--                                                <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, XYZ Softwear</strong></div>-->
-        <!--                                            </div>-->
-        <!--                                        </div>-->
-        <!--                                    </blockquote>-->
-        <!--                                </div>-->
-        <!--                                &lt;!&ndash; Quote 5 &ndash;&gt;-->
-        <!--                                <div class="item">-->
-        <!--                                    <blockquote>-->
-        <!--                                        <div class="row">-->
-        <!--                                            <div class="col-sm-8 col-sm-offset-2">-->
-        <!--                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
-        <!--                                                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. .</p>-->
-        <!--                                                <div class="holder-info"><strong class="name">John Doe</strong> <strong class="designation">CEO, ABC Softwear</strong></div>-->
-        <!--                                            </div>-->
-        <!--                                        </div>-->
-        <!--                                    </blockquote>-->
-        <!--                                </div>-->
-        <!--                            </div>-->
-
-        <!--                            &lt;!&ndash; Carousel Buttons Next/Prev &ndash;&gt;-->
-        <!--                            <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a> <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>                            </div>-->
-        <!--                    </div>-->
-
-        <!--                </div>-->
-        <!--            </div>-->
-
-
-        <!--        </div>-->
     </div>
 
     <!-- Special Product slider -->
@@ -773,6 +682,34 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+{#        <script type="text/javascript">#}
+{#         $(".add-card").click(function(event) {#}
+{#            let s=0;#}
+{#            $('.product_price').each(function(i,obj){#}
+{#                let text=$(this).attr('product-price');#}
+{#                s += parseInt(text);#}
+{#            });#}
+{#            $('#order_prize').text(s);#}
+{#        });#}
+{#        </script>#}
+
+        <script type="text/javascript">
+         $(document).ready(function(){
+            $('.order_prize').each(function(i,obj){
+                let text=$(this).attr('order-costs');
+                num=text.split(',');
+                let s=0;
+                for(let i in num){
+                    if(num[i]!='')
+                      s += parseInt(num[i]);
+                      }
+                    $('#order_prize').text(s);
+                });
+
+        });
+        </script>
+
     <script>
         $(document).on('click',".add-card",function(){
 {#            var id =#}
@@ -781,7 +718,6 @@
             var data = new FormData();
             data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
             data.append("id", $(this).attr('product-id'));
-
             event.preventDefault();
                   $.ajax({
                   type: 'POST',
@@ -791,13 +727,26 @@
                   contentType: false,
                   processData: false,
                   success: function (result){
-{#                  text = '';#}
-{#                  text = `<option value='0' style='width:100%' class='form-control'>--- Mahsulotni tanlang ---</option>`;#}
-{#                     for (let i = 0; i < result['products'].length; i++) {#}
-{#                        text +=`<option class='form-control' style='width:100%' value=`+result['products'][i].id+`>`+result['products'][i].name+ `</option>`;#}
-{#                     }#}
-{#                        $('#product').html(text);#}
-                    console.log('success');
+                       $('#alert_save_message').css('display','inline-block');
+                      console.log(result['product']);
+                      text = ``;
+
+                        text += `<li class="item first">`;
+                                          text += `<div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#">`;
+                                                text += `<img alt="Product Title Here" src="/`+result['product'][0].foto+`"> </a>`;
+                                                text += `<div class="product-details"><div class="access">`;
+                                                    text += `<a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>`;
+                                                    text += `<p class="product-name"><a href="#">`+result['product'][0].name+`</a> </p>`;
+                                                    text += `<strong>1</strong> x <span class="price product_price" product-price="`+result['product'][0].cost_discount+`">`+result['product'][0].cost_discount+`</span> </div></div></li>`;
+
+
+                      $('#cart-sidebar').append(text);
+                      $('.cart_count').html(result['count']);
+                      $('.order_prize').html(result['cost']);
+
+                        setTimeout(function () {
+                            $('#alert_save_message').css('display','none');
+                         }, 3000);
                   },
 
                   error: function(){
@@ -807,5 +756,7 @@
         });
 
     </script>
+
+
 
 {% endblock content %}
