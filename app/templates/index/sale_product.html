@@ -1,6 +1,8 @@
 ﻿{% extends 'index/master.html' %}
 {% load static %}
 {% load i18n %}
+{% load l10n %}
+    {% load humanize %}
 {% block title %} To'plamlar {% endblock %}
 {#{% block title %} Янги Шартномалар {% endblock %}#}
 {% block stylecontent %}
@@ -84,8 +86,8 @@
                             <div class="jtv-box-hover">
                               <ul class="add-to-links">
                                 <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                                <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                                <li><a class="link-compare" href="shop_list.html"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
+                                <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                <li><a class="link-compare" href="{% url 'show_product' id=product.id %}"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
                               </ul>
                             </div>
                           </div>
@@ -97,12 +99,12 @@
                             <div class="item-content">
                               <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                               <div class="item-price">
-                                  <del class="price">{{product.cost_sell}} so'm</del>
-                                  <span class="regular-price"> <span class="price">{{product.cost_discount}} so'm</span> </span>
-{#                                <div class="price-box"> <span class="regular-price"> <span class="price">{{product.cost_sell}} so'm</span> </span> </div>#}
+                                   <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{product.cost_sell|intcomma}} so'm</span> </p>
+                                  <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product.cost_discount|intcomma}} so'm</span> </p>
+
                               </div>
                               <div class="action">
-                                <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Savatchaga qo'shish</span> </button>
+                                <button class="button btn-cart add-card" product-id="{{ product.id }}" type="button" title="" data-original-title="Add to Cart"><span>Savatchaga qo'shish</span> </button>
                               </div>
                             </div>
                           </div>

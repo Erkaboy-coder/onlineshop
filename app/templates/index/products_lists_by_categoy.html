@@ -1,6 +1,8 @@
 ﻿{% extends 'index/master.html' %}
 {% load static %}
 {% load i18n %}
+{% load l10n %}
+    {% load humanize %}
 {% block title %} To'plamlar list ko'rinishi {% endblock %}
 {#{% block title %} Янги Шартномалар {% endblock %}#}
 {% block stylecontent %}
@@ -92,31 +94,31 @@
               </div>
             </div>
             <div class="category-products">
-              <ol class="products-list" id="products-list">
+              <ol class="products-list" style="width: 120%" id="products-list">
 
                 {% for product in products %}
                     <li class="item"  style="box-shadow: 5px 8px 5px 8px rgba(0,0,0,0.4);">
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="show.html" title="Product Title Here">
-                            <img class="small-image" src="/{{ product.foto }}" STYLE="height: 250px" alt="Product Title Here">
+                            <a href="{% url 'show_product' id=product.id %}" title="Product Title Here">
+                            <img class="small-image" src="/{{ product.foto }}" style="height: 250px" alt="Product Title Here">
                           </a>
                         </div>
                         <div class="col-md-6">
-                            <h2 class="product-name"><a href="show.html" title="Product Title Here">{{ product.name}}</a></h2>
+                            <h2 class="product-name"><a href="{% url 'show_product' id=product.id %}" title="Product Title Here">{{ product.name}}</a></h2>
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
-                              <p class="rating-links"> <a href="#">2 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
+{#                              <p class="rating-links"> <a href="#">2 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>#}
                             </div>
-                             <p id="info">{{ product.info|safe|striptags|truncatechars:100 }} <a class="link-learn" title="" href="show.html">Batafsil</a> </p>
+                             <p id="info">{{ product.info|safe|striptags|truncatechars:100 }} <a class="link-learn" title="" href="{% url 'show_product' id=product.id %}">Batafsil</a> </p>
 
                             <div class="price-box">
-                              <p class="old-price"> <span class="price-label"></span> <span class="price"> {{product.cost_sell}} so'm</span> </p>
-                              <p class="special-price"> <span class="price-label"></span> <span class="price"> {{product.cost_discount}} so'm</span> </p>
+                              <p class="old-price"> <span class="price-label"></span> <span class="price"> {{product.cost_sell|intcomma}} so'm</span> </p>
+                              <p class="special-price"> <span class="price-label"></span> <span class="price"> {{product.cost_discount|intcomma}} so'm</span> </p>
                             </div>
                             <div class="actions">
-                              <button class="button btn-cart" title="Add to Cart" type="button"><span>Savatchaga qo'shish</span></button>
+                              <button class="button btn-cart add-card" product-id="{{ product.id }}" type="button"><span>Savatchaga qo'shish</span></button>
                               <span class="add-to-links">
-                                  <a title="Add to Wishlist" class="button link-wishlist" href="wishlist.html"><span>Sevimlilarga qo'shish</span></a>
+                                  <a title="Add to Wishlist" class="button link-wishlist" href="#"><span>Sevimlilarga qo'shish</span></a>
                               </span>
                             </div>
                         </div>

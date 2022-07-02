@@ -148,6 +148,37 @@ def change_product_amount(request):
     else:
         return HttpResponse(0)
 # order
+def set_add_to_card(request):
+    if request.method == 'POST':
+        data = request.POST
+        id = data.get('set-id')
+        if id:
+            collection = Collection.objects.filter(id=id).first()
+            if collection:
+                products_sets = ProductSet.objects.filter(collection=collection).all()
+                for i in products_sets:
+                    # if i.product:
+                    #     return HttpResponse(2)
+                    # else:
+                    orderstore = OrderStore(product=i.product)
+                    orderstore.save()
+
+                    product = Products.objects.filter(id=i.product.id)
+
+
+        count = OrderStore.objects.all().count()
+        costs = OrderStore.objects.all()
+        cost = 0
+        for i in costs:
+            cost = cost + int(i.product.cost_discount)
+
+        # orders = OrderStore.objects.all()
+        return JsonResponse({'product': list(product.values()), 'count': count, 'cost':cost}, safe=False)
+        # return HttpResponse(1)
+    else:
+        return HttpResponse(0)
+
+
 def add_card(request):
     if request.method == 'POST':
         data = request.POST
@@ -155,29 +186,24 @@ def add_card(request):
         if id:
             product = Products.objects.filter(id=id).first()
             if product:
-                orderstore = OrderStore(product=product)
-                orderstore.save()
+                check = OrderStore.objects.filter(product=product).first()
+                if check:
+                    return HttpResponse(2)
+                else:
+                    orderstore = OrderStore(product=product)
+                    orderstore.save()
         count = OrderStore.objects.all().count()
         costs = OrderStore.objects.all()
         cost = 0
         for i in costs:
-            cost =  cost + int(i.product.cost_discount)
+            cost = cost + int(i.product.cost_discount)
         object = OrderStore.objects.filter(id=orderstore.id).first()
-
         product = Products.objects.filter(id=object.product.id)
 
-        # category = Category.objects.filter(id=id).first()
-        # if category:
-        #     products = Products.objects.filter(category=category)
-        # print(subdivisions)
-        # pdowork = PdoWork.objects.filter(id=work.first().pdowork.id)
-        
-        return JsonResponse({'product': list(product.values()), 'count': count, 'cost':cost}, safe=False)
+        return JsonResponse({'product': list(product.values()), 'count': count, 'cost': cost}, safe=False)
         # return HttpResponse(1)
     else:
         return HttpResponse(0)
-
-
 
 # order
 def sets(request):
@@ -205,9 +231,10 @@ def show_set_product(request,id):
     categories = Category.objects.all()
 
     collection = Collection.objects.filter(id=id).first()
+    collections = Collection.objects.filter(~Q(id=id)).filter(name=collection.name)[:10]
     products = ProductSet.objects.filter(collection=collection).all()
 
-    context = {'categories':categories, 'classess':classes, 'products':products, 'collection':collection,'products':products,'ordersstore':ordersstore}
+    context = {'categories':categories, 'classess':classes, 'products':products, 'collection':collection, 'ordersstore':ordersstore, 'collections':collections}
 
     return render(request, 'index/show_set_product.html', context)
 
@@ -389,7 +416,7 @@ def products_sets(request):
     products = ProductSet.objects.all()
     all_products = Products.objects.all()
 
-    context = {'products': products,'all_products':all_products,'collections':collections,'classess':classess,'counter': counter(request)}
+    context = {'products': products, 'all_products': all_products, 'collections':collections, 'classess':classess, 'counter': counter(request)}
     return render(request, 'admin_page/products_sets/product_sets.html', context)
 
 @login_required(login_url='/sign_in')
@@ -400,7 +427,7 @@ def add_collection(request):
     products = ProductSet.objects.all()
     all_products = Products.objects.all()
 
-    context = {'classess': classess,'collections' :collections,'products':products,'all_products':all_products,'counter': counter(request)}
+    context = {'classess': classess, 'collections' :collections, 'products':products, 'all_products': all_products, 'counter': counter(request)}
 
     return render(request, 'admin_page/products_sets/create.html', context)
 
@@ -422,7 +449,7 @@ def collection_create(request):
         foto =request.FILES.get('foto')
         info = request.POST.get('info')
 
-        collections = Collection(sinf=cl,name=name,foto=foto,description=info,status=0)
+        collections = Collection(sinf=cl, name=name, foto=foto, description=info, status=0)
         collections.save()
 
         return redirect('/product_add_to_collection/%d/'%collections.id)

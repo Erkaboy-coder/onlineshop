@@ -25,6 +25,7 @@ urlpatterns = [
 
     # order
     re_path(r'^add_card$', views.add_card, name='add_card'),
+    re_path(r'^set_add_to_card$', views.set_add_to_card, name='set_add_to_card'),
 
     re_path(r'^order_store/$', views.order_store, name='order_store'),
     re_path(r'^delete_product_from_store/(?P<id>\d+)/$', views.delete_product_from_store, name='delete_product_from_store'),

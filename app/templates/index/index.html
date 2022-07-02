@@ -96,8 +96,8 @@
                                                     <div class="hot-label hot-top-left">35% chegirma</div>
                                                     <div class="jtv-box-hover">
                                                         <ul class="add-to-links">
-                                                            <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                                                            <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
                                                             <li><a class="link-compare" href="{% url 'show_product' id=product.id %}"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
                                                         </ul>
                                                     </div>
@@ -145,12 +145,6 @@
                                 <h2>Maktab o'quvchilari uchun to'plamlar</h2>
                                 <br>
                             </div>
-
-                            <!--                             <div class="tab-panel active" id="tab-1">-->
-                            <!--                            <div class="category-products">-->
-                            <!--                                <ul class="products-grid">-->
-                            <!--                                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">-->
-                            <!--                                        <div class="item-inner">-->
 
                             <div class="row products-grid" id="1-term">
                                 <div class="col-md-4 item">
@@ -237,8 +231,8 @@
                                                 <div class="new-label new-top-left "><b style="font-size: 13px"><i class="fa fa-star-half-o"></i></b></div>
                                                 <div class="jtv-box-hover">
                                                     <ul class="add-to-links">
-                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
                                                         <li><a class="link-compare" href="{% url 'show_product' id=product.id %}"><i class="fa fa-eye"></i><span class="hidden">Show</span></a></li>
                                                     </ul>
                                                 </div>
@@ -424,8 +418,8 @@
                                                 <div class="new-label new-top-left" style="background-color: red"><b style="font-size: 13px">Yangi</b></div>
                                                 <div class="jtv-box-hover">
                                                     <ul class="add-to-links">
-                                                        <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                                                        <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                                        <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                                        <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
                                                         <li><a class="link-compare" href="{% url 'show_product' id=product.id %}"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
                                                     </ul>
                                                 </div>
@@ -556,52 +550,49 @@
         });
         </script>
 
-    <script>
-        $(document).on('click',".add-card",function(){
-{#            var id =#}
-{#            alert($(this).attr('product-id'));#}
-
-            var data = new FormData();
-            data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
-            data.append("id", $(this).attr('product-id'));
-            event.preventDefault();
-                  $.ajax({
-                  type: 'POST',
-                  url: '{% url 'add_card' %}',
-                  data: data,
-                  cache: false,
-                  contentType: false,
-                  processData: false,
-                  success: function (result){
-                       $('#alert_save_message').css('display','inline-block');
-                      console.log(result['product']);
-                      text = ``;
-
-                        text += `<li class="item first">`;
-                                          text += `<div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#">`;
-                                                text += `<img alt="Product Title Here" src="/`+result['product'][0].foto+`"> </a>`;
-                                                text += `<div class="product-details"><div class="access">`;
-                                                    text += `<a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>`;
-                                                    text += `<p class="product-name"><a href="#">`+result['product'][0].name+`</a> </p>`;
-                                                    text += `<strong>1</strong> x <span class="price product_price" product-price="`+result['product'][0].cost_discount+`">`+result['product'][0].cost_discount+`</span> </div></div></li>`;
-
-
-                      $('#cart-sidebar').append(text);
-                      $('.cart_count').html(result['count']);
-                      $('.order_prize').html(result['cost']);
-
-                        setTimeout(function () {
-                            $('#alert_save_message').css('display','none');
-                         }, 3000);
-                  },
-
-                  error: function(){
-                        alert('Ajax da xatolik !! ');
-                     }
-            });
-        });
-
-    </script>
+{#    <script>#}
+{#        $(document).on('click',".add-card",function(){#}
+{#            var data = new FormData();#}
+{#            data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);#}
+{#            data.append("id", $(this).attr('product-id'));#}
+{#            event.preventDefault();#}
+{#                  $.ajax({#}
+{#                  type: 'POST',#}
+{#                  url: '{% url 'add_card' %}',#}
+{#                  data: data,#}
+{#                  cache: false,#}
+{#                  contentType: false,#}
+{#                  processData: false,#}
+{#                  success: function (result){#}
+{#                       $('#alert_save_message').css('display','inline-block');#}
+{#                      console.log(result['product']);#}
+{#                      text = ``;#}
+{##}
+{#                        text += `<li class="item first">`;#}
+{#                                          text += `<div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#">`;#}
+{#                                                text += `<img alt="Product Title Here" src="/`+result['product'][0].foto+`"> </a>`;#}
+{#                                                text += `<div class="product-details"><div class="access">`;#}
+{#                                                    text += `<a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>`;#}
+{#                                                    text += `<p class="product-name"><a href="#">`+result['product'][0].name+`</a> </p>`;#}
+{#                                                    text += `<strong>1</strong> x <span class="price product_price" product-price="`+result['product'][0].cost_discount+`">`+result['product'][0].cost_discount+`</span> </div></div></li>`;#}
+{##}
+{##}
+{#                      $('#cart-sidebar').append(text);#}
+{#                      $('.cart_count').html(result['count']);#}
+{#                      $('.order_prize').html(result['cost']);#}
+{##}
+{#                        setTimeout(function () {#}
+{#                            $('#alert_save_message').css('display','none');#}
+{#                         }, 3000);#}
+{#                  },#}
+{##}
+{#                  error: function(){#}
+{#                        alert('Ajax da xatolik !! ');#}
+{#                     }#}
+{#            });#}
+{#        });#}
+{##}
+{#    </script>#}
 
 
 

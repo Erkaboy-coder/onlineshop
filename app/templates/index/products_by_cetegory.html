@@ -81,8 +81,8 @@
                               </a>
                             <div class="jtv-box-hover">
                               <ul class="add-to-links">
-                                <li><a class="link-quickview" href="quick_view.html"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                                <li><a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
+                                <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
+                                <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
                                 <li><a class="link-compare" href="{% url 'show_product' id=product.id %}"><i class="fa fa-eye"></i><span class="hidden">Compare</span></a></li>
                               </ul>
                             </div>
@@ -98,7 +98,7 @@
                                     <p class="special-price"> <span class="price-label"></span> <span class="price"> {{product.cost_discount|intcomma}} so'm</span>
                               </div>
                               <div class="action">
-                                <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Savatchaga qo'shish</span> </button>
+                                <button class="button btn-cart add-card" product-id="{{ product.id }}" type="button" title="" data-original-title="Add to Cart"><span>Savatchaga qo'shish</span> </button>
                               </div>
                             </div>
                           </div>
