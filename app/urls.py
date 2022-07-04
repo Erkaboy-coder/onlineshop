@@ -31,6 +31,8 @@ urlpatterns = [
     re_path(r'^delete_product_from_store/(?P<id>\d+)/$', views.delete_product_from_store, name='delete_product_from_store'),
     re_path(r'^change_product_amount$', views.change_product_amount, name='change_product_amount'),
 
+    re_path(r'^show_districts$', views.show_districts, name='show_districts'),
+
     re_path(r'^order_page/$', views.order_page, name='order_page'),
     re_path(r'^order$', views.order, name='order'),
 

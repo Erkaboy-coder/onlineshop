@@ -146,11 +146,37 @@
                         <div class="panel-heading">
                              <h3 class="panel-title">Yetkazib berish</h3>
                         </div>
+
                         <div class="panel-body">
-                            <div class="form-group">
-                                <label class="control-label">Viloyat yoki Shahar <sup class="text-danger">*</sup></label>
-                                <input maxlength="100" style="width: 100%" type="text" id="region" name="region" required="required" class="form-control" placeholder="Ismingizni kiriting" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Viloyat yoki Shaharni tanlang <sup class="text-danger">*</sup></label>
+        {#                                <input maxlength="100" style="width: 100%" type="text" id="region" name="region" required="required" class="form-control" placeholder="Ismingizni kiriting" />#}
+                                        <select name="region" class="form-control" id="region" >
+                                            <option value="0"> -- Viloyat yoki Shaharni tanlang -- </option>
+                                            {% for oblast in oblasts %}
+                                                <option value="{{ oblast.id }}">{{ oblast.fullname }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group" id="district_content" style="display:none;width: 100%">
+                                        <label class="control-label">Tumanni tanlang <sup class="text-danger">*</sup></label>
+        {#                                <input maxlength="100" style="width: 100%" type="text" id="region" name="region" required="required" class="form-control" placeholder="Ismingizni kiriting" />#}
+                                        <select name="district" class="form-control" id="district" style="width: 100%" >
+
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
+
+
+
 
                             <div class="form-group">
                                 <label class="control-label">Tuman yashash manzili <sup class="text-danger">*</sup></label>
@@ -227,6 +253,7 @@
                         <th class="text-center">Soni</th>
                         <th class="text-center">Mahsulot narxi</th>
                         <th class="text-center">Mahsulot chegirma narxi</th>
+                        <th class="text-center">Jami narxi</th>
 
                         <th class="action">O'chirish</th>
                       </tr>
@@ -242,6 +269,7 @@
                                 </td>
                                 <td class="text-center"><span class="text-danger">{{ order.product.cost_sell|intcomma }} so'm</span></td>
                                 <td class="text-center"><span>{{ order.product.cost_discount|intcomma }} so'm</span></td>
+                                <td class="text-center"><span>{% widthratio order.product.cost_discount 1 order.product_amount %} so'm</span></td>
                                 <td style="width: 10%" ><a href="{% url 'delete_product_from_store' id=order.product.id %}"><i class="fa fa-trash-o"></i></a></td>
                           </tr>
                         {% endfor %}
@@ -271,6 +299,44 @@
   <!--End main-container --> 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+            $(document).ready(function(){
+                $('#region').change(function() {
+
+                if($('#region').val() != '0'){
+                    $('#district_content').css('display','inline-block');
+                }
+                else{
+                    $('#district_content').css('display','none');
+                }
+
+                var data = new FormData();
+                data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
+                data.append("region", $('#region').val());
+
+                event.preventDefault();
+                      $.ajax({
+                      type: 'POST',
+                      url: '{% url 'show_districts' %}',
+                      data: data,
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+                      success: function (result){
+                      text = `<option value='0' >--- Tumanni tanlang ---</option>`;
+                         for (let i = 0; i < result['district'].length; i++) {
+                            text +=`<option value=`+result['district'][i].id+`>`+result['district'][i].fullname +`</option>`;
+                         }
+                            $('#district').html(text);
+                      },
+
+                      error: function(){
+                            alert('Ajax da xatolik !! ');
+                         }
+                      });
+                });
+          });
+    </script>
 
     <script>
         $(document).on('change',".product_amount",function(){
@@ -307,6 +373,7 @@
             data.append("last_name", $('#last_name').val());
             data.append("last_name", $('#last_name').val());
             data.append("region", $('#region').val());
+            data.append("district", $('#district').val());
             data.append("address", $('#address').val());
             data.append("payment_method", $('#payment_method').val());
             data.append("contact", $('#contact').val());

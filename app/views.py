@@ -77,11 +77,12 @@ def order_page(request):
     orders = OrderStore.objects.all()
     categories = Category.objects.all()
     ordersstore = OrderStore.objects.all()
+    oblasts = Oblast.objects.all()
     products = Products.objects.order_by('-id')[:10]
     cost = 0
     for i in orders:
         cost = cost + int(i.product_amount)*int(i.product.cost_discount)
-    context = {'orders': orders,'cost':cost,'categories':categories,'ordersstore':ordersstore,'products':products}
+    context = {'orders': orders,'cost':cost,'categories':categories,'ordersstore':ordersstore,'products':products,'oblasts':oblasts}
     return render(request, 'index/order.html', context)
 
 
@@ -91,6 +92,7 @@ def order(request):
         first_name = data.get('first_name')
         last_name = data.get('last_name')
         region = data.get('region')
+        district = data.get('district')
         address = data.get('address')
         payment_method = data.get('payment_method')
         contact = data.get('contact')
@@ -111,7 +113,7 @@ def order(request):
                 worker.save()
 
         for i in orders:
-            order = Order(user=worker, product=i.product, product_amount=i.product_amount,payment_method=payment_method, address=address, region=region)
+            order = Order(user=worker, product=i.product, product_amount=i.product_amount,payment_method=payment_method, address=address, region=region,district=district)
             order.save()
 
         for i in orders:
@@ -147,11 +149,26 @@ def change_product_amount(request):
         return HttpResponse(1)
     else:
         return HttpResponse(0)
+
+def show_districts(request):
+    if request.method == 'POST':
+        data = request.POST
+        id = data.get('region')
+        district = Region.objects.filter(oblast=id)
+        # print(subdivisions)
+        # pdowork = PdoWork.objects.filter(id=work.first().pdowork.id)
+
+        return JsonResponse({'district': list(district.values())}, safe=False)
+    else:
+        return HttpResponse(0)
+
 # order
+import json
 def set_add_to_card(request):
     if request.method == 'POST':
         data = request.POST
-        id = data.get('set-id')
+        id = data.get('id')
+        lists = []
         if id:
             collection = Collection.objects.filter(id=id).first()
             if collection:
@@ -160,21 +177,25 @@ def set_add_to_card(request):
                     # if i.product:
                     #     return HttpResponse(2)
                     # else:
-                    orderstore = OrderStore(product=i.product)
+                    orderstore = OrderStore(product=i.product, product_amount=i.product_amount)
                     orderstore.save()
 
                     product = Products.objects.filter(id=i.product.id)
+                    lists.append(product)
 
+        # orders = OrderStore.objects.all()
+        # for i in orders:
+        #     products = Products.objects.filter(id__in=i.product.id)
+        # print(products)
 
         count = OrderStore.objects.all().count()
         costs = OrderStore.objects.all()
         cost = 0
-        for i in costs:
-            cost = cost + int(i.product.cost_discount)
 
-        # orders = OrderStore.objects.all()
-        return JsonResponse({'product': list(product.values()), 'count': count, 'cost':cost}, safe=False)
-        # return HttpResponse(1)
+        for i in costs:
+            cost = cost + int(i.product.cost_discount)*int(i.product_amount)
+
+        return JsonResponse({'product': json.dumps(lists, sort_keys=True), 'count': count, 'cost': cost}, safe=False)
     else:
         return HttpResponse(0)
 

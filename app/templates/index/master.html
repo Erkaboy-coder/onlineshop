@@ -249,7 +249,7 @@
                                                                     <a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a>
                                                                 </div>
                                                                 <p class="product-name"><a href="#">{{order.product.name}}</a> </p>
-                                                                <strong>1</strong> x <span class="price product_price" product-price="{{ order.product.cost_discount }}"><b>{{order.product.cost_discount|intcomma}}</b> so'm</span>
+                                                                <strong>{{ order.product_amount }}</strong> x <span class="price" ><b>{{order.product.cost_discount}}</b> so'm</span>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -266,8 +266,7 @@
                                                     </div>
                                                     <div class="col-md-6  text-center">
                                                         <b class="p-10">
-                                                            <span class="order_prize" id="order_prize" order-costs="{% for foo in ordersstore %}{{ foo.product.cost_discount }},{% endfor %}"></span> so'm
-{#                                                            <span class="order_prize" id="order_prize"></span> so'm#}
+                                                            <span class="order_prize" id="order_prize" order-costs="{% for order in ordersstore %}{% widthratio order.product.cost_discount 1 order.product_amount %},{% endfor %}"></span> so'm
                                                         </b>
                                                     </div>
                                                 </div>
@@ -275,17 +274,19 @@
                                             </div>
                                             <br>
                                              <div class="actions">
-                                                  <button class="btn-lg btn-success" title="Checkout" type="button" style="width: 100%">
-                                                      <span>
-                                                            <a href="{% url 'order_page' %}" style="color:whitesmoke;">Sotib olish</a>
-                                                      </span>
-                                                  </button>
-                                                 <br><br>
                                                   <button class="btn-lg btn-primary" title="Checkout" type="button" style="width: 100%">
                                                       <span>
                                                             <a href="{% url 'order_store' %}" style="color:whitesmoke;">Savatga o'tish</a>
                                                       </span>
                                                   </button>
+                                                 <br><br>
+                                                  <button class="btn-lg btn-success" title="Checkout" type="button" style="width: 100%">
+                                                      <span>
+                                                            <a href="{% url 'order_page' %}" style="color:whitesmoke;">Sotib olish</a>
+                                                      </span>
+                                                  </button>
+
+
 
                                               </div>
 
@@ -623,6 +624,64 @@
 
 
                       $('#cart-sidebar').append(text);
+                      setTimeout(function () {
+                            $('#alert_save_message').css('display','none');
+                         }, 3000);
+
+                      }
+
+                      $('.cart_count').html(result['count']);
+                      $('.order_prize').html(result['cost']);
+                        setTimeout(function () {
+                            $('#alert_check_message').css('display','none');
+                         }, 3000);
+                  },
+
+                  error: function(){
+                        alert('Ajax da xatolik !! ');
+                     }
+            });
+        });
+
+    </script>
+
+            <script>
+        $(document).on('click',".set-add-to-card",function(){
+            var data = new FormData();
+            data.append("csrfmiddlewaretoken", document.getElementsByName("csrfmiddlewaretoken")[0].value);
+            data.append("id", $(this).attr('set-id'));
+            event.preventDefault();
+                  $.ajax({
+                  type: 'POST',
+                  url: '{% url 'set_add_to_card' %}',
+                  data: data,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success: function (result){
+                  console.log(result);
+                  if(result == 2){
+                    $('#alert_check_message').css('display','inline-block');
+                  }
+                  else{
+                       $('#alert_save_message').css('display','inline-block');
+
+                      console.log(result['product']);
+
+                      text = ``;
+                        for (let i = 0; i < result['product'].length; i++) {
+                            text += `<li class="item first">`;
+                                          text += `<div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#">`;
+                                                text += `<img alt="Product Title Here" src="/`+result['product'][i].foto+`"> </a>`;
+                                                text += `<div class="product-details"><div class="access">`;
+                                                    text += `<a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>`;
+                                                    text += `<p class="product-name"><a href="#">`+result['product'][i].name+`</a> </p>`;
+                                                    text += `<strong>`+result['product'][i].product_amount+`</strong> x <span class="price product_price" product-price="`+result['product'][0].cost_discount+`">`+result['product'][i].cost_discount+`</span> </div></div></li>`;
+
+
+                            $('#cart-sidebar').append(text);
+                        }
+
                       setTimeout(function () {
                             $('#alert_save_message').css('display','none');
                          }, 3000);

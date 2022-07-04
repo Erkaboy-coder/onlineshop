@@ -61,6 +61,7 @@
                         <th class="text-center">Soni</th>
                         <th class="text-center">Mahsulot narxi</th>
                         <th class="text-center">Mahsulot chegirma narxi</th>
+                        <th class="text-center">Jami narxi</th>
 
                         <th class="action">O'chirish</th>
                       </tr>
@@ -76,6 +77,7 @@
                                 </td>
                                 <td class="text-center"><span class="text-danger">{{ order.product.cost_sell|intcomma }} so'm</span></td>
                                 <td class="text-center"><span>{{ order.product.cost_discount|intcomma }} so'm</span></td>
+                                <td class="text-center"><span>{% widthratio order.product.cost_discount 1 order.product_amount %} so'm</span></td>
                                 <td style="width: 10%" ><a href="{% url 'delete_product_from_store' id=order.product.id %}"><i class="fa fa-trash-o"></i></a></td>
                           </tr>
                         {% endfor %}

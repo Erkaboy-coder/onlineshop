@@ -35,29 +35,29 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
 
-class Regions(models.Model):
-    name = models.CharField(max_length=100, null=True, blank=True)
-    code = models.CharField(max_length=100, null=True, blank=True)
-    description = models.TextField(blank=True)
+class Oblast(models.Model):
+    ordernumber = models.IntegerField(null=True, blank=True)
+    shortname = models.CharField(max_length=100, null=True, blank=True)
+    fullname = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.fullname
 
     class Meta:
-        verbose_name_plural = "Regions"
+        verbose_name_plural = "Oblast"
 
 
-class District(models.Model):
-    region = models.ForeignKey(Regions, blank=True, null=True, on_delete=models.CASCADE, related_name='region')
-    name = models.CharField(max_length=100, null=True, blank=True)
-    code = models.CharField(max_length=100, null=True, blank=True)
-    description = models.TextField(blank=True)
+class Region(models.Model):
+    oblast = models.ForeignKey(Oblast, blank=True, null=True, on_delete=models.CASCADE, related_name='oblast')
+    ordernumber = models.IntegerField(null=True, blank=True)
+    shortname = models.CharField(max_length=100, null=True, blank=True)
+    fullname = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.fullname
 
     class Meta:
-        verbose_name_plural = "Districts"
+        verbose_name_plural = "Region"
 
 
 class Classes(models.Model):

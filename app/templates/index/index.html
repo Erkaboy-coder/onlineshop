@@ -88,9 +88,9 @@
                             <div id="hot-deal-slider" class="product-flexslider hidden-buttons">
                                 <div class="slider-items slider-width-col4">
                                     {% for product in products_new %}
-                                        <div class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img">
+                                        <div class="item" >
+                                        <div class="item-inner" >
+                                            <div class="item-img" >
                                                 <div class="item-img-info">
                                                     <a href="#" title="Product Title Here" class="product-image"> <img src="/{{ product.foto }}" class="img-fluid" style="height: 270px" alt="Product Title Here"></a>
                                                     <div class="hot-label hot-top-left">35% chegirma</div>
@@ -105,7 +105,7 @@
                                             </div>
 
                                             <div class="item-info">
-                                                <div class="info-inner">
+                                                <div class="info-inner" >
                                                     <div class="item-title"> <a href="{% url 'show_product' id=product.id %}" title="Product Title Here">
                                                         {{ product.name }}</a></div>
                                                     <div class="item-content">
@@ -148,7 +148,7 @@
 
                             <div class="row products-grid" id="1-term">
                                 <div class="col-md-4 item">
-                                    <div class="content item-inner">
+                                    <div class="content item-inner" style="border-radius: 15px">
                                         <div class="new-label new-top-right">new</div>
                                         <a href="{% url 'set_by_class' id=1 %}" >
                                             <div class="content-overlay"></div>
@@ -163,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 item">
-                                    <div class="content item-inner">
+                                    <div class="content item-inner" style="border-radius: 15px">
                                         <div class="new-label new-top-right">new</div>
                                         <a href="{% url 'set_by_class' id=2 %}" target="_blank">
                                             <div class="content-overlay"></div>
@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 item">
-                                    <div class="content item-inner">
+                                    <div class="content item-inner" style="border-radius: 15px">
                                         <div class="new-label new-top-right">new</div>
                                         <a href="{% url 'set_by_class' id=3 %}" target="_blank">
                                             <div class="content-overlay"></div>
@@ -221,8 +221,8 @@
                         <div id="bestsell-slider" class="product-flexslider hidden-buttons">
                             <div class="slider-items slider-width-col4 products-grid block-content">
                                 {% for product in most_saled %}
-                                    <div class="item">
-                                    <div class="item-inner">
+                                    <div class="item " >
+                                    <div class="item-inner" style="border-radius: 15px">
                                         <div class="item-img">
                                             <div class="item-img-info">
                                                 <a class="product-image" title="Product Title Here" ref="single_product.html ">
@@ -270,8 +270,8 @@
         <div class="jtv-bottom-banner-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="jtv-img-box">
+                    <div class="col-sm-4" >
+                        <div class="jtv-img-box" style="border-radius: 15px">
                             <a href="#"> <img src="{% static 'site/images/extra/bags/6.jpg' %}" style="width: 100%;height: 240px" alt="bottom banner">
                                 <div class="jtv-banner-info"> <span class=""><b>Istalgan turdaki ruchkalar</b> </span>
                                     <h3 style="color: red"><b class="bg-danger">Ruchkalar olami</b></h3>
@@ -280,7 +280,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="jtv-img-box">
+                        <div class="jtv-img-box" style="border-radius: 15px">
                             <a href="#"> <img src="{% static 'site/images/extra/bags/5.jpg' %}" style="width: 100%;height: 240px" alt="bottom banner">
                                  <div class="jtv-banner-info"> <span><b>Istalgan turdaki qalamlar</b> </span>
                                     <h3 style="color: red"><b class="bg-danger">Qalamlar olami</b></h3>
@@ -289,7 +289,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="jtv-img-box">
+                        <div class="jtv-img-box" style="border-radius: 15px">
                             <a href="#"> <img src="{% static 'site/images/extra/bags/3.jpg' %}" style="width: 100%;height: 240px" alt="bottom banner">
                                  <div class="jtv-banner-info"> <span><b>Istalgan turdaki daftarlar</b> </span>
                                     <h3 style="color: red"><b class="bg-danger">Daftarlar olami</b></h3>
@@ -316,7 +316,7 @@
 
                                 {% for product in products_most_showed %}
                                     <div class="item">
-                                    <div class="item-inner">
+                                    <div class="item-inner" style="border-radius: 15px">
                                         <div class="item-img">
                                             <div class="item-img-info">
                                                 <a class="product-image" title="Product Title Here" ref="single_product.html ">
@@ -365,7 +365,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
-                        <div class="jtv-img-box">
+                        <div class="jtv-img-box" style="border-radius: 15px">
                             <a href="#"> <img src="{% static 'site/images/extra/bags/2.jpg' %}" style="width: 100%;height: 240px" alt="bottom banner">
                                 <div class="jtv-banner-info"> <span class=""><b>Istalgan turdaki so'mkalar</b> </span>
                                     <h3 style="color: red"><b class="bg-danger">So'mkalar olami</b></h3>
@@ -374,7 +374,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="jtv-img-box">
+                        <div class="jtv-img-box" style="border-radius: 15px">
                             <a href="#"> <img src="{% static 'site/images/extra/bags/6.png' %}" style="width: 100%;height: 240px" alt="bottom banner">
                                 <div class="jtv-banner-info"> <span class=""><b>Matematik to'plamlar</b> </span>
                                     <h3 style="color: red"><b class="bg-danger">Xisob kitob qurollari</b></h3>
@@ -383,7 +383,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="jtv-img-box">
+                        <div class="jtv-img-box" style="border-radius: 15px">
                             <a href="#"> <img src="{% static 'site/images/extra/bags/2.jpeg' %}" style="width: 100%;height: 240px" alt="bottom banner">
                                 <div class="jtv-banner-info"> <span class=""><b>Istalgan turdaki komputerlar uchun so'mkalar</b> </span>
                                     <h3 style="color: red"><b class="bg-danger">Komputer so'mkalari</b></h3>
@@ -409,7 +409,7 @@
                             <div class="slider-items slider-width-col4 products-grid block-content">
                                 {% for product in products_new %}
                                     <div class="item">
-                                    <div class="item-inner">
+                                    <div class="item-inner" style="border-radius: 15px">
                                         <div class="item-img">
                                             <div class="item-img-info">
                                                 <a class="product-image" title="Product Title Here" ref="single_product.html ">
