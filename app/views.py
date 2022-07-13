@@ -1,3 +1,5 @@
+import socket
+
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login as dj_login, logout as auth_logout
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -11,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Count
+# from uuid import getnode as get_mac
+
 
 def counter(request):
     counter = {}
@@ -20,21 +24,27 @@ def counter(request):
 
     return counter
 
-# def oderstore(request):
-#     orderstore = {}
-#     orderstore['orderstore'] = OrderStore.objects.all()
-#
-#     return orderstore
 
 def index(request):
     products = Products.objects.order_by('-id').all()
     categories = Category.objects.all()
-    ordersstore = OrderStore.objects.all()
+
+
+    session = request.session.get('key')
+    # del request.session['key']
+    print(session)
+
+    ordersstore = OrderStore.objects.filter(session=session).all()
+    print(ordersstore.count())
     most_saled = Products.objects.order_by('-status_trent')[:10]
 
     products_most_showed =  Products.objects.order_by('-show')[:10]
     trendproduct =  Products.objects.order_by('-show').first()
     products_new =  Products.objects.order_by('-id')[:10]
+
+    # print(session)
+    # del request.session['id']
+    # request.session['company'] = False
 
     context = {'products':products,'categories':categories,'products_most_showed':products_most_showed, 'products_new':products_new,'ordersstore':ordersstore,
                'trendproduct':trendproduct,'most_saled':most_saled}
@@ -46,7 +56,8 @@ def contact(request):
 
     products_new_sales =  Products.objects.filter(sale_status=1).order_by('-id')[:10]
     products_new =  Products.objects.order_by('-id')[:10]
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     context = {'products':products,'categories':categories,'products_new_sales':products_new_sales, 'products_new':products_new,'ordersstore':ordersstore}
     return render(request, 'index/contact_us.html', context)
 
@@ -57,9 +68,14 @@ def error_page(request):
     context = {'products':products,'categories':categories}
     return render(request, 'index/404error.html', context)
 def order_store(request):
-    orders = OrderStore.objects.all()
+
+    session = request.session.get('key')
+    orders = OrderStore.objects.filter(session=session).all()
     categories = Category.objects.all()
-    ordersstore = OrderStore.objects.all()
+
+
+    ordersstore = OrderStore.objects.filter(session=session).all()
+
     products = Products.objects.order_by('-id')[:10]
     cost = 0
     for i in orders:
@@ -74,9 +90,12 @@ def delete_product_from_store(request,id):
     return redirect('/order_store')
 
 def order_page(request):
-    orders = OrderStore.objects.all()
+
+    session = request.session.get('key')
+    orders = OrderStore.objects.filter(session=session).all()
     categories = Category.objects.all()
-    ordersstore = OrderStore.objects.all()
+    ordersstore = OrderStore.objects.filter(session=session).all()
+
     oblasts = Oblast.objects.all()
     products = Products.objects.order_by('-id')[:10]
     cost = 0
@@ -174,28 +193,24 @@ def set_add_to_card(request):
             if collection:
                 products_sets = ProductSet.objects.filter(collection=collection).all()
                 for i in products_sets:
-                    # if i.product:
+
+                    # if OrderStore.objects.filter(collection=collection).first():
                     #     return HttpResponse(2)
                     # else:
-                    orderstore = OrderStore(product=i.product, product_amount=i.product_amount)
+                    orderstore = OrderStore(product=i.product, product_amount=i.product_amount, collection=collection)
                     orderstore.save()
 
-                    product = Products.objects.filter(id=i.product.id)
-                    lists.append(product)
+                    # product = Products.objects.filter(id=i.product.id)
+                    # lists.append(product)
 
         # orders = OrderStore.objects.all()
         # for i in orders:
         #     products = Products.objects.filter(id__in=i.product.id)
         # print(products)
+        session = request.session.get('key')
+        count = OrderStore.objects.filter(session=session).all().count()
 
-        count = OrderStore.objects.all().count()
-        costs = OrderStore.objects.all()
-        cost = 0
-
-        for i in costs:
-            cost = cost + int(i.product.cost_discount)*int(i.product_amount)
-
-        return JsonResponse({'product': json.dumps(lists, sort_keys=True), 'count': count, 'cost': cost}, safe=False)
+        return JsonResponse({'count': count}, safe=False)
     else:
         return HttpResponse(0)
 
@@ -204,24 +219,47 @@ def add_card(request):
     if request.method == 'POST':
         data = request.POST
         id = data.get('id')
+
+
+
+
+        session = request.session.get('key')
+        # print(session)
+
         if id:
             product = Products.objects.filter(id=id).first()
             if product:
-                check = OrderStore.objects.filter(product=product).first()
+                check = OrderStore.objects.filter(product=product).filter(session=session).first()
                 if check:
                     return HttpResponse(2)
                 else:
-                    orderstore = OrderStore(product=product)
-                    orderstore.save()
-        count = OrderStore.objects.all().count()
-        costs = OrderStore.objects.all()
-        cost = 0
-        for i in costs:
-            cost = cost + int(i.product.cost_discount)
-        object = OrderStore.objects.filter(id=orderstore.id).first()
-        product = Products.objects.filter(id=object.product.id)
+                    if session:
+                        orderstore = OrderStore(product=product, session=session)
+                    else:
+                        import secrets
+                        a1 = secrets.token_hex(10)
+                        request.session['key'] = a1
 
-        return JsonResponse({'product': list(product.values()), 'count': count, 'cost': cost}, safe=False)
+                        new_session = request.session.get('key')
+
+                        orderstore = OrderStore(product=product, session=new_session)
+                    orderstore.save()
+
+        session = request.session.get('key')
+        count = OrderStore.objects.filter(session=session).all().count()
+
+        # costs = OrderStore.objects.all()
+        # cost = 0
+        # for i in costs:
+        #     cost = cost + int(i.product.cost_discount)
+        # object = OrderStore.objects.filter(id=orderstore.id).first()
+
+        # product = Products.objects.filter(id=object.product.id)
+        # order = OrderStore.objects.all()
+        # serialize1 = serialize('json', order, use_natural_foreign_keys=True, use_natural_primary_keys=True)
+        # return JsonResponse({'orders': serialize1, 'count': count, 'cost': cost}, safe=False)
+
+        return JsonResponse({'count': count}, safe=False)
         # return HttpResponse(1)
     else:
         return HttpResponse(0)
@@ -233,12 +271,14 @@ def sets(request):
     collections = Collection.objects.order_by('-id').all()
     classess = Classes.objects.all()
     categories = Category.objects.all()
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories,'ordersstore':ordersstore}
     return render(request, 'index/products_sets.html', context)
 
 def set_by_class(request,id):
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     collections = Collection.objects.filter(sinf=id).all()
     sinf = Classes.objects.filter(id=id).first()
     classes = Classes.objects.all()
@@ -247,7 +287,8 @@ def set_by_class(request,id):
     return render(request, 'index/products_sets_by_class.html', context)
 
 def show_set_product(request,id):
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     classes = Classes.objects.all()
     categories = Category.objects.all()
 
@@ -260,7 +301,8 @@ def show_set_product(request,id):
     return render(request, 'index/show_set_product.html', context)
 
 def show_product(request,id):
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     classes = Classes.objects.all()
     categories = Category.objects.all()
     product = Products.objects.filter(id=id).first()
@@ -277,15 +319,17 @@ def sets_list_view(request):
     products_sets = ProductSet.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
-    ordersstore = OrderStore.objects.all()
-    context = {'products':products,'products_sets':products_sets,'collections':collections,'classess':classess,'categories':categories,'ordersstore':ordersstore}
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
+    context = {'products': products,'products_sets':products_sets, 'collections': collections, 'classess': classess, 'categories': categories, 'ordersstore':ordersstore}
     return render(request, 'index/shop_list_sets.html', context)
 
 
 def products_by_category(request,id):
     products = Products.objects.filter(category=id).all()
     one = Category.objects.filter(id=id).first()
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     categories = Category.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
@@ -297,7 +341,8 @@ def products_by_category(request,id):
 def products_lists_by_category(request,id):
     products = Products.objects.filter(category=id).all()
     one = Category.objects.filter(id=id).first()
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     categories = Category.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
@@ -308,7 +353,8 @@ def products_lists_by_category(request,id):
 def sale_products(request):
     categories = Category.objects.all()
     products = Products.objects.order_by('-id').filter(sale_status=1).all()
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     products_sets = ProductSet.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()
@@ -318,7 +364,8 @@ def sale_products(request):
 def new_products(request):
     categories = Category.objects.all()
     products = Products.objects.order_by('-id').all()
-    ordersstore = OrderStore.objects.all()
+    session = request.session.get('key')
+    ordersstore = OrderStore.objects.filter(session=session).all()
     products_sets = ProductSet.objects.all()
     collections = Collection.objects.all()
     classess = Classes.objects.all()

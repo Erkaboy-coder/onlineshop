@@ -10,9 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    <meta name="description" content="best template, template free, responsive Template, fashion store, responsive Template, responsive html Template, Premium website templates, web templates, Multi-Purpose Responsive HTML5 Template">
-    <meta name="keywords" content="bootstrap, ecommerce, fashion, layout, responsive, responsive template, responsive template download, responsive Template, retail, shop, shopping, store, Premium website templates, web templates, Multi-Purpose Responsive HTML5 Template"
-    />
+    <meta name="description" content="Maktab o'quv qurolarini online sotib olish, Online konstavar sotib olish, tezkor konstavar mahsulotlarini sotib olish">
+    <meta name="keywords" content="maktab o'quv qurollari, daftar , ruchka, qalam, sumkalar"/>
 
     <!-- Mobile specific metas  -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -168,18 +167,18 @@
                         <div class="row">
                             <!-- Header Language -->
                             <div class="col-xs-12 col-sm-6">
-                                <div class="welcome-msg">Welcome to ShopMart! </div>
+                                <div class="welcome-msg">All Martga xush kelibsiz </div>
                                 <div class="dropdown jtv-language-box">
                                     <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="{% static 'site/images/flag-english.jpg' %}" alt="language"> English <span class="caret"></span> </a>
-                                    <ul class="dropdown-menu" role="menu">
+                                    <ul class="dropdown-menu" role="menu" style="width: 120%">
                                         <li>
-                                            <a class="selected" href="#"> <img src="{% static 'site/images/flag-english.jpg' %}" alt="flag"> <span>English</span> </a>
+                                            <a class="selected" href="#"> <img src="{% static 'site/new/en.png' %}" style="width: 30%" alt="flag"> <span>English</span> </a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{% static 'site/images/flag-default.jpg' %}" alt="flag"> <span>Русский</span> </a>
+                                            <a href="#"> <img src="{% static 'site/new/ru.png' %}" style="width: 30%" alt="flag"> <span>Русский</span> </a>
                                         </li>
                                         <li>
-                                            <a href="#"> <img src="{% static 'site/images/flag-german.jpg' %}" alt="flag"> <span>O'zbek</span> </a>
+                                            <a href="#"> <img src="{% static 'site/new/uz.jpg' %}" style="width: 30%" alt="flag"> <span>O'zbek</span> </a>
                                         </li>
 
                                     </ul>
@@ -202,19 +201,19 @@
                                 <div class="jtv-top-links">
                                     <div class="links">
                                         <ul>
-                                            <li> <a title="Wishlist" href="#l">Sevimlilar</a> </li>
-                                            <li> <a title="Checkout" href="orderstore.html"><span class="hidden-xs">Xaridlar</span></a> </li>
-                                            <li>
-                                                <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> Ko'proq <span class="caret"></span></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#"> Biz haqimizda </a> </li>
-                                                        <li><a href="#"> Xizmat ko'rsatish </a> </li>
-                                                        <li><a href="#"> Xavfsizlik </a> </li>
-                                                        <li><a href="#">Sayt kartasi </a> </li>
-                                                        <li><a href="#">Qidiruv</a> </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
+                                            <li> <a title="Wishlist" href="#">Sevimlilar</a> </li>
+{#                                            <li> <a title="Checkout" href="orderstore.html"><span class="hidden-xs">Xaridlar</span></a> </li>#}
+{#                                            <li>#}
+{#                                                <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> Ko'proq <span class="caret"></span></a>#}
+{#                                                    <ul class="dropdown-menu">#}
+{#                                                        <li><a href="#"> Biz haqimizda </a> </li>#}
+{#                                                        <li><a href="#"> Xizmat ko'rsatish </a> </li>#}
+{#                                                        <li><a href="#"> Xavfsizlik </a> </li>#}
+{#                                                        <li><a href="#">Sayt kartasi </a> </li>#}
+{#                                                        <li><a href="#">Qidiruv</a> </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </li>#}
                                             <li> <a href="#"><span class="hidden-xs"><i class="fa fa-user"></i> Kabinet</span></a> </li>
                                         </ul>
                                     </div>
@@ -230,68 +229,69 @@
                             <div class="jtv-top-cart-box">
                                 <!-- Top Cart -->
                                 <div class="mini-cart">
-                                    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
-                                        <a href="#"> <span class="cart_count">{{ ordersstore.count }}</span><span>Savatcha</span> </a>
+                                    <div  class="basket dropdown-toggle">
+{#                                    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">#}
+                                        <a href="{% url 'order_store' %}"> <span class="cart_count">{{ ordersstore.count }}</span><span>Savatcha</span> </a>
                                     </div>
             {% csrf_token %}
-                                    <div>
-                                        <div class="jtv-top-cart-content">
-
-                                           <ul class="mini-products-list" id="cart-sidebar">
-                                                {% for order in ordersstore %}
-                                                    <li class="item first">
-                                                        <div class="item-inner">
-                                                            <a class="product-image" title="Product Title Here" ref="#">
-                                                                <img alt="Product Title Here" src="/{{order.product.foto}}">
-                                                            </a>
-                                                            <div class="product-details">
-                                                                <div class="access">
-                                                                    <a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a>
-                                                                </div>
-                                                                <p class="product-name"><a href="#">{{order.product.name}}</a> </p>
-                                                                <strong>{{ order.product_amount }}</strong> x <span class="price" ><b>{{order.product.cost_discount}}</b> so'm</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                {% endfor %}
-                                           </ul>
-
-                                            <div class="container-fluid">
-                                                <div class="row bg-info" style="font-size: 15px">
-                                                    <div class="col-md-2 text-center">
-                                                        <b>Summa:</b>
-                                                    </div>
-                                                    <div class="col-md-4">
-
-                                                    </div>
-                                                    <div class="col-md-6  text-center">
-                                                        <b class="p-10">
-                                                            <span class="order_prize" id="order_prize" order-costs="{% for order in ordersstore %}{% widthratio order.product.cost_discount 1 order.product_amount %},{% endfor %}"></span> so'm
-                                                        </b>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <br>
-                                             <div class="actions">
-                                                  <button class="btn-lg btn-primary" title="Checkout" type="button" style="width: 100%">
-                                                      <span>
-                                                            <a href="{% url 'order_store' %}" style="color:whitesmoke;">Savatga o'tish</a>
-                                                      </span>
-                                                  </button>
-                                                 <br><br>
-                                                  <button class="btn-lg btn-success" title="Checkout" type="button" style="width: 100%">
-                                                      <span>
-                                                            <a href="{% url 'order_page' %}" style="color:whitesmoke;">Sotib olish</a>
-                                                      </span>
-                                                  </button>
-
-
-
-                                              </div>
-
-                                        </div>
-                                    </div>
+{#                                    <div>#}
+{#                                        <div class="jtv-top-cart-content">#}
+{##}
+{#                                           <ul class="mini-products-list" id="cart-sidebar">#}
+{#                                                {% for order in ordersstore %}#}
+{#                                                    <li class="item first">#}
+{#                                                        <div class="item-inner">#}
+{#                                                            <a class="product-image" title="Product Title Here" ref="#">#}
+{#                                                                <img alt="Product Title Here" src="/{{order.product.foto}}">#}
+{#                                                            </a>#}
+{#                                                            <div class="product-details">#}
+{#                                                                <div class="access">#}
+{#                                                                    <a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a>#}
+{#                                                                </div>#}
+{#                                                                <p class="product-name"><a href="#">{{order.product.name}}</a> </p>#}
+{#                                                                <strong>{{ order.product_amount }}</strong> x <span class="price" ><b>{{order.product.cost_discount}}</b> so'm</span>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </li>#}
+{#                                                {% endfor %}#}
+{#                                           </ul>#}
+{##}
+{#                                            <div class="container-fluid">#}
+{#                                                <div class="row bg-info" style="font-size: 15px">#}
+{#                                                    <div class="col-md-2 text-center">#}
+{#                                                        <b>Summa:</b>#}
+{#                                                    </div>#}
+{#                                                    <div class="col-md-4">#}
+{##}
+{#                                                    </div>#}
+{#                                                    <div class="col-md-6  text-center">#}
+{#                                                        <b class="p-10">#}
+{#                                                            <span class="order_prize" id="order_prize" order-costs="{% for order in ordersstore %}{% widthratio order.product.cost_discount 1 order.product_amount %},{% endfor %}"></span> so'm#}
+{#                                                        </b>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{##}
+{#                                            </div>#}
+{#                                            <br>#}
+{#                                             <div class="actions">#}
+{#                                                  <button class="btn-lg btn-primary" title="Checkout" type="button" style="width: 100%">#}
+{#                                                      <span>#}
+{#                                                            <a href="{% url 'order_store' %}" style="color:whitesmoke;">Savatga o'tish</a>#}
+{#                                                      </span>#}
+{#                                                  </button>#}
+{#                                                 <br><br>#}
+{#                                                  <button class="btn-lg btn-success" title="Checkout" type="button" style="width: 100%">#}
+{#                                                      <span>#}
+{#                                                            <a href="{% url 'order_page' %}" style="color:whitesmoke;">Sotib olish</a>#}
+{#                                                      </span>#}
+{#                                                  </button>#}
+{##}
+{##}
+{##}
+{#                                              </div>#}
+{##}
+{#                                        </div>#}
+{#                                    </div>#}
 
                                 </div>
                             </div>
@@ -299,14 +299,16 @@
                         <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box">
                             <!-- Header Logo -->
                             <div class="logo">
-                                <a title="eCommerce" href="{% url 'index' %}"><img alt="eCommerce" src="{% static 'site/images/logo.png' %}"> </a>
+{#                                <h2>🄰🄻🄻 🄼🄰🅁🅃</h2>#}
+{#                                <a title="eCommerce" href="{% url 'index' %}"><img alt="eCommerce" src="{% static 'site/images/logo.png' %}"> </a>#}
+                                <a title="eCommerce" href="{% url 'index' %}"><img alt="eCommerce" src="{% static 'site/new/4.png' %}" style="width: 50%;"> </a>
                             </div>
                             <!-- End Header Logo -->
                         </div>
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
                             <div class="search-box">
-                                <form action="http://htmlshopmart.justthemevalley.com/version4/cat" method="POST" id="search_mini_form" name="Categories">
-                                    <input type="text" placeholder="Search entire store here..." value="Search" maxlength="70" name="search" id="search">
+                                <form action="#" method="POST" id="search_mini_form" name="Categories">
+                                    <input type="text" placeholder="Qidirish..."  maxlength="70" name="search" id="search">
                                     <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
                                 </form>
                             </div>
@@ -492,7 +494,7 @@
             <div class="container">
                 <div class="row">
                     <div style="text-align:center">
-                        <a href="index.html"><img src="{% static 'site/images/footer-logo.png' %}" alt="logo"> </a>
+                        <a href="index.html"><img src="{% static 'site/new/4.png' %}" style="width: 20%;" alt="logo"> </a>
                     </div>
                     <address>
                       <p> <i class="fa fa-map-marker"></i>Toshkent Chilonzor</p>
@@ -591,6 +593,20 @@
         });
         </script>
 
+        <script>
+{#        $(document).ready(function(){#}
+
+{#            let x = document.cookie;#}
+{#            console.log(x);#}
+
+
+{#              const output = document.getElementById('cookies')#}
+{#              output.textContent = ''#}
+
+
+{#         });#}
+        </script>
+
      <script>
         $(document).on('click',".add-card",function(){
             var data = new FormData();
@@ -611,19 +627,18 @@
                   }
                   else{
                        $('#alert_save_message').css('display','inline-block');
-{#                      console.log(result['product']);#}
-                      text = ``;
-
-                        text += `<li class="item first">`;
-                                          text += `<div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#">`;
-                                                text += `<img alt="Product Title Here" src="/`+result['product'][0].foto+`"> </a>`;
-                                                text += `<div class="product-details"><div class="access">`;
-                                                    text += `<a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>`;
-                                                    text += `<p class="product-name"><a href="#">`+result['product'][0].name+`</a> </p>`;
-                                                    text += `<strong>1</strong> x <span class="price product_price" product-price="`+result['product'][0].cost_discount+`">`+result['product'][0].cost_discount+`</span> </div></div></li>`;
-
-
-                      $('#cart-sidebar').append(text);
+{#                      console.log(result['orders']['fields'].name);#}
+{#                      text = ``;#}
+{#                        for(let i=0; i < result['orders'].length; i++){#}
+{#                            text += `<li class="item first">`;#}
+{#                                              text += `<div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#">`;#}
+{#                                                    text += `<img alt="Product Title Here" src="/`+result['orders'][i].foto+`"> </a>`;#}
+{#                                                    text += `<div class="product-details"><div class="access">`;#}
+{#                                                    text += `<a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>`;#}
+{#                                                    text += `<p class="product-name"><a href="#">`+result['orders'][0].name+`</a> </p>`;#}
+{#                                                    text += `<strong>1</strong> x <span class="price product_price" product-price="`+result['orders'][0].cost_discount+`">`+result['orders'][0].cost_discount+`</span> </div></div></li>`;#}
+{#                            $('#cart-sidebar').append(text);#}
+{#                        }#}
                       setTimeout(function () {
                             $('#alert_save_message').css('display','none');
                          }, 3000);
@@ -666,21 +681,21 @@
                   else{
                        $('#alert_save_message').css('display','inline-block');
 
-                      console.log(result['product']);
+{#                      console.log(result['product']);#}
 
-                      text = ``;
-                        for (let i = 0; i < result['product'].length; i++) {
-                            text += `<li class="item first">`;
-                                          text += `<div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#">`;
-                                                text += `<img alt="Product Title Here" src="/`+result['product'][i].foto+`"> </a>`;
-                                                text += `<div class="product-details"><div class="access">`;
-                                                    text += `<a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>`;
-                                                    text += `<p class="product-name"><a href="#">`+result['product'][i].name+`</a> </p>`;
-                                                    text += `<strong>`+result['product'][i].product_amount+`</strong> x <span class="price product_price" product-price="`+result['product'][0].cost_discount+`">`+result['product'][i].cost_discount+`</span> </div></div></li>`;
-
-
-                            $('#cart-sidebar').append(text);
-                        }
+{#                      text = ``;#}
+{#                        for (let i = 0; i < result['product'].length; i++) {#}
+{#                            text += `<li class="item first">`;#}
+{#                                          text += `<div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#">`;#}
+{#                                                text += `<img alt="Product Title Here" src="/`+result['product'][i].foto+`"> </a>`;#}
+{#                                                text += `<div class="product-details"><div class="access">`;#}
+{#                                                    text += `<a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>`;#}
+{#                                                    text += `<p class="product-name"><a href="#">`+result['product'][i].name+`</a> </p>`;#}
+{#                                                    text += `<strong>`+result['product'][i].product_amount+`</strong> x <span class="price product_price" product-price="`+result['product'][0].cost_discount+`">`+result['product'][i].cost_discount+`</span> </div></div></li>`;#}
+{##}
+{##}
+{#                            $('#cart-sidebar').append(text);#}
+{#                        }#}
 
                       setTimeout(function () {
                             $('#alert_save_message').css('display','none');
@@ -689,7 +704,7 @@
                       }
 
                       $('.cart_count').html(result['count']);
-                      $('.order_prize').html(result['cost']);
+{#                      $('.order_prize').html(result['cost']);#}
                         setTimeout(function () {
                             $('#alert_check_message').css('display','none');
                          }, 3000);

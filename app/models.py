@@ -73,8 +73,7 @@ class Classes(models.Model):
 
 
 class Products(models.Model):
-    category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE,
-                                 related_name='productcategory')
+    category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE, related_name='productcategory')
     name = models.CharField(max_length=100, null=True, blank=True)
     cost_buy = models.CharField(max_length=100, null=True, blank=True)
     cost_sell = models.CharField(max_length=100, null=True, blank=True)
@@ -99,6 +98,10 @@ class Products(models.Model):
 
     class Meta:
         verbose_name_plural = "Products"
+
+    def natural_key(self):
+        return dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields if f.name != 'category' and f.name != 'foto' ]])
+
 
 class Collection(models.Model):
     sinf = models.ForeignKey(Classes, blank=True, null=True, on_delete=models.CASCADE, related_name='sinf')
@@ -136,7 +139,7 @@ class ProductSet(models.Model):
 class OrderStore(models.Model):
     product = models.ForeignKey(Products, blank=True, null=True, on_delete=models.CASCADE, related_name='productstore')
     collection = models.ForeignKey(Collection, blank=True, null=True, on_delete=models.CASCADE, related_name='productcollectionstore')
-
+    session = models.CharField(max_length=100, null=True, blank=True)
     product_amount = models.IntegerField(default=1, blank=True)
     status = models.IntegerField(default=0, blank=True)
     # status = 0 bolsa bu karzinkada turgan mahsulot hisoblanadi
@@ -147,6 +150,12 @@ class OrderStore(models.Model):
         return self.product.name
     class Meta:
         verbose_name_plural = "OrderStore"
+        ordering = ['-id']
+
+
+    def natural_key(self):
+        return dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields if f.name != 'collection']])
+
 
 
 
@@ -156,8 +165,8 @@ class Worker(BaseModel):
         verbose_name="Related user",
         help_text="User linked to this admin")
 
-    firstname = models.CharField(verbose_name="firstname",null=True, max_length=256)
-    lastname = models.CharField(verbose_name="lastname",null=True, max_length=256)
+    firstname = models.CharField(verbose_name="firstname", null=True, blank=True, max_length=256)
+    lastname = models.CharField(verbose_name="lastname", null=True, blank=True, max_length=256)
 
     permission = models.BooleanField(default=False)
     email = models.EmailField(verbose_name='email', default='', max_length=250, blank=True)

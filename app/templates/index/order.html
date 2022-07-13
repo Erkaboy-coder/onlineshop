@@ -228,7 +228,14 @@
                         <div class="panel-body">
                              <div class="form-group">
                                 <label class="control-label">Telefon raqamingiz <sup class="text-danger">*</sup></label>
-                                <input maxlength="100" style="width: 100%" type="text" id="contact" name="contact" required="required" class="form-control" placeholder="+998 9* *** ** **" />
+                                 <div class="row">
+                                     <div class="col-md-1">
+                                         <input maxlength="100" style="width: 100%" type="text" readonly class="form-control" value="+998" />
+                                     </div>
+                                     <div class="col-md-11">
+                                        <input maxlength="100" style="width: 100%" type="text" id="contact" name="contact" required="required" class="form-control" placeholder="** *** ** **" />
+                                     </div>
+                                 </div>
                             </div>
                             <button class="btn btn-success pull-right" type="button" id="order">Xaridni amalga oshirish</button>
                         </div>
@@ -254,7 +261,7 @@
                         <th class="text-center">Mahsulot narxi</th>
                         <th class="text-center">Mahsulot chegirma narxi</th>
                         <th class="text-center">Jami narxi</th>
-
+                          <th class="text-center">To'plam</th>
                         <th class="action">O'chirish</th>
                       </tr>
                     </thead>
@@ -270,12 +277,22 @@
                                 <td class="text-center"><span class="text-danger">{{ order.product.cost_sell|intcomma }} so'm</span></td>
                                 <td class="text-center"><span>{{ order.product.cost_discount|intcomma }} so'm</span></td>
                                 <td class="text-center"><span>{% widthratio order.product.cost_discount 1 order.product_amount %} so'm</span></td>
+                                <td class="text-center">
+                                        <span>
+                                        {% if order.collection %}
+                                            {{ order.collection }}
+                                        {% else %}
+                                            <i class="text-warning">dona</i>
+                                            {% endif %}
+                                        </span>
+                                    </td>
                                 <td style="width: 10%" ><a href="{% url 'delete_product_from_store' id=order.product.id %}"><i class="fa fa-trash-o"></i></a></td>
                           </tr>
                         {% endfor %}
                     </tbody>
                     <tfoot>
                       <tr>
+                        <td ></td>
                         <td ></td>
                         <td ></td>
                         <td colspan="3" style="font-size: 15px;font-weight: bold"><strong>Umimiy qiymati:</strong></td>
